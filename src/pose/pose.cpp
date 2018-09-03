@@ -74,6 +74,7 @@ void LinearPoseReduction::projectReducedToFull(const float * reduced, float * fu
 
 ParamMapPoseReduction::ParamMapPoseReduction(const int fullDims, const int redDims, const int * mapping, float * mins, float * maxs, std::string * names) :
     LinearPoseReduction(fullDims,redDims), _mapping(fullDims) {
+    std::cout << "top" << std::endl;
     std::vector<float> b(fullDims,0.f);
     std::vector<float> A(fullDims*redDims,0.f);
     for (int f=0; f<fullDims; ++f) {
@@ -82,9 +83,10 @@ ParamMapPoseReduction::ParamMapPoseReduction(const int fullDims, const int redDi
     }
 
     init(A.data(),b.data(),mins,maxs,names);
-
+    std::cout << "before" << std::endl;
     memcpy(_mapping.hostPtr(),mapping,fullDims*sizeof(float));
     _mapping.syncHostToDevice();
+    std::cout << "after" << std::endl;
 
 }
 

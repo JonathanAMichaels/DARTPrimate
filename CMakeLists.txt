@@ -14,8 +14,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/CMakeModules/"
 
 # find packages with modules
 find_package(CUDA REQUIRED)
-find_package(PNG REQUIRED)
 find_package(OpenGL REQUIRED QUIET)
+find_package(PNG REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(DEPTHSENSE)
@@ -45,6 +45,13 @@ link_libraries(
     ${tinyxml_LIBRARIES}
     ${matheval_LIBRARIES}
 )
+
+foreach(dir ${PNG_INCLUDE_DIRS})
+    message(STATUS "dir='${dir}'")
+endforeach()
+foreach(dir ${PNG_LIBRARIES})
+    message(STATUS "dir='${dir}'")
+endforeach()
 
 # set dart source
 set(dart_src
@@ -222,7 +229,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 set(CUDA_NVCC_FLAGS "-arch=sm_35" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
 
 # add library
-if(CUDA_FOUND)
+if (CUDA_FOUND)
     #include_directories(${CUDA_TOOLKIT_ROOT_DIR}/samples/common)
 
     add_custom_target(linkTarget COMMAND ln -sf ${CUDA_TOOLKIT_ROOT_DIR}/samples/common/inc/helper_math.h ${PROJECT_SOURCE_DIR}/src/util/helper_math.h)
