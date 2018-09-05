@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/jonathan/Desktop/DARTPrimate/src/depth_sources/openni_depth_source.cpp" "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir/src/depth_sources/openni_depth_source.cpp.o"
   "/home/jonathan/Desktop/DARTPrimate/src/geometry/geometry.cpp" "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir/src/geometry/geometry.cpp.o"
   "/home/jonathan/Desktop/DARTPrimate/src/geometry/plane_fitting.cpp" "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir/src/geometry/plane_fitting.cpp.o"
   "/home/jonathan/Desktop/DARTPrimate/src/geometry/sdf.cpp" "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir/src/geometry/sdf.cpp.o"
@@ -43,7 +42,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/eigen3"
   "/home/jonathan/anaconda3/include"
-  "/home/jonathan/Desktop/OpenNI2/Include"
   "/usr/include/assimp"
   "../src"
   "/usr/local/cuda/include"

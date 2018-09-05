@@ -283,12 +283,6 @@ CUDA_npps_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libnpps.so
 //Path to a library.
 CUDA_rt_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/librt.so
 
-//The directory where DepthSense.hxx resides
-DEPTHSENSE_INCLUDE_DIR:PATH=DEPTHSENSE_INCLUDE_DIR-NOTFOUND
-
-//The DepthSense library
-DEPTHSENSE_LIBRARIES:FILEPATH=DEPTHSENSE_LIBRARIES-NOTFOUND
-
 //Path to a file.
 GLEW_INCLUDE_DIR:PATH=/usr/include
 
@@ -334,12 +328,6 @@ OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
 //Path to a file.
 OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 
-//Path to a file.
-OPENNI2_INCLUDE_DIR:PATH=/home/jonathan/Desktop/OpenNI2/Include
-
-//Path to a library.
-OPENNI2_LIBRARY:FILEPATH=/usr/local/lib/libOpenNI2.so
-
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
@@ -365,7 +353,7 @@ ZLIB_LIBRARY_RELEASE:FILEPATH=/home/jonathan/anaconda3/lib/libz.so
 dart_BINARY_DIR:STATIC=/home/jonathan/Desktop/DARTPrimate/build
 
 //Dependencies for the target
-dart_LIB_DEPENDS:STATIC=general;/home/jonathan/anaconda3/lib/libpng.so;general;/home/jonathan/anaconda3/lib/libz.so;general;/usr/lib/x86_64-linux-gnu/libGLU.so;general;/usr/lib/x86_64-linux-gnu/libGL.so;general;/usr/lib/x86_64-linux-gnu/libglut.so;general;/usr/lib/x86_64-linux-gnu/libGLEW.so;general;tinyxml;general;matheval;general;/usr/local/lib/libOpenNI2.so;general;assimp;general;/usr/local/cuda/lib64/libcudart_static.a;general;-lpthread;general;dl;general;/usr/lib/x86_64-linux-gnu/librt.so;
+dart_LIB_DEPENDS:STATIC=general;/home/jonathan/anaconda3/lib/libpng.so;general;/home/jonathan/anaconda3/lib/libz.so;general;/usr/lib/x86_64-linux-gnu/libGLU.so;general;/usr/lib/x86_64-linux-gnu/libGL.so;general;/usr/lib/x86_64-linux-gnu/libglut.so;general;/usr/lib/x86_64-linux-gnu/libGLEW.so;general;tinyxml;general;matheval;general;assimp;general;/usr/local/cuda/lib64/libcudart_static.a;general;-lpthread;general;dl;general;/usr/lib/x86_64-linux-gnu/librt.so;
 
 //Value Computed by CMake
 dart_SOURCE_DIR:STATIC=/home/jonathan/Desktop/DARTPrimate
@@ -594,8 +582,6 @@ FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda][/usr/local/cuda/bin
 FIND_PACKAGE_MESSAGE_DETAILS_GLEW:INTERNAL=[/usr/include][/usr/lib/x86_64-linux-gnu/libGLEW.so][v()]
 //Details about finding GLUT
 FIND_PACKAGE_MESSAGE_DETAILS_GLUT:INTERNAL=[/usr/lib/x86_64-linux-gnu/libglut.so][/usr/include][v()]
-//Details about finding OpenNI2
-FIND_PACKAGE_MESSAGE_DETAILS_OpenNI2:INTERNAL=[/usr/local/lib/libOpenNI2.so][/home/jonathan/Desktop/OpenNI2/Include][v()]
 //Details about finding PNG
 FIND_PACKAGE_MESSAGE_DETAILS_PNG:INTERNAL=[/home/jonathan/anaconda3/lib/libpng.so][/home/jonathan/anaconda3/include][v1.6.34()]
 //Details about finding PkgConfig
@@ -634,34 +620,6 @@ OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
 OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENNI2_INCLUDE_DIR
-OPENNI2_INCLUDE_DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: OPENNI2_LIBRARY
-OPENNI2_LIBRARY-ADVANCED:INTERNAL=1
-PC_OPENNI_CFLAGS:INTERNAL=
-PC_OPENNI_CFLAGS_I:INTERNAL=
-PC_OPENNI_CFLAGS_OTHER:INTERNAL=
-PC_OPENNI_FOUND:INTERNAL=
-PC_OPENNI_INCLUDEDIR:INTERNAL=
-PC_OPENNI_LIBDIR:INTERNAL=
-PC_OPENNI_LIBS:INTERNAL=
-PC_OPENNI_LIBS_L:INTERNAL=
-PC_OPENNI_LIBS_OTHER:INTERNAL=
-PC_OPENNI_LIBS_PATHS:INTERNAL=
-PC_OPENNI_PREFIX:INTERNAL=
-PC_OPENNI_STATIC_CFLAGS:INTERNAL=
-PC_OPENNI_STATIC_CFLAGS_I:INTERNAL=
-PC_OPENNI_STATIC_CFLAGS_OTHER:INTERNAL=
-PC_OPENNI_STATIC_LIBDIR:INTERNAL=
-PC_OPENNI_STATIC_LIBS:INTERNAL=
-PC_OPENNI_STATIC_LIBS_L:INTERNAL=
-PC_OPENNI_STATIC_LIBS_OTHER:INTERNAL=
-PC_OPENNI_STATIC_LIBS_PATHS:INTERNAL=
-PC_OPENNI_VERSION:INTERNAL=
-PC_OPENNI_openni2-dev_INCLUDEDIR:INTERNAL=
-PC_OPENNI_openni2-dev_LIBDIR:INTERNAL=
-PC_OPENNI_openni2-dev_PREFIX:INTERNAL=
-PC_OPENNI_openni2-dev_VERSION:INTERNAL=
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PNG_LIBRARY_DEBUG
@@ -676,7 +634,6 @@ ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
 ZLIB_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_RELEASE
 ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
-__pkg_config_checked_PC_OPENNI:INTERNAL=1
 __pkg_config_checked_assimp:INTERNAL=1
 __pkg_config_checked_eigen3:INTERNAL=1
 __pkg_config_checked_matheval:INTERNAL=1

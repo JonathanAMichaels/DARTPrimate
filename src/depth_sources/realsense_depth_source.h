@@ -1,30 +1,20 @@
-#ifndef OPENNI_DEPTH_SOURCE_H
-#define OPENNI_DEPTH_SOURCE_H
+#ifndef REALSENSE_DEPTH_SOURCE_H
+#define REALSENSE_DEPTH_SOURCE_H
 
 #include "depth_source.h"
-#include <OpenNI.h>
+#include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 #include <vector_types.h>
 
 namespace dart {
 
 template <typename DepthType, typename ColorType>
-class OpenNIDepthSource : public DepthSource<ushort,uchar3> {
+class RealSenseDepthSource : public DepthSource<ushort,uchar3> {
 public:
-    OpenNIDepthSource();
+    RealSenseDepthSource();
 
-    ~OpenNIDepthSource();
+    ~RealSenseDepthSource();
 
-    bool initialize(const char * deviceURI = openni::ANY_DEVICE,
-                    const bool getColor = true,
-                    const uint depthWidth = 640,
-                    const uint depthHeight = 480,
-                    const uint depthFPS = 30,
-                    const uint colorWidth = 640,
-                    const uint colorHeight = 480,
-                    const uint colorFPS = 30,
-                    const bool mirror = false,
-                    const bool frameSync = true,
-                    const bool registerDepth = true);
+    bool initialize(const bool isLive = true);
 
     const ushort * getDepth() const;
 
@@ -47,15 +37,12 @@ public:
     inline float getScaleToMeters() const { return 1/(1000.0f); }
 
 private:
-    openni::Device _device;
-    openni::VideoStream _depthStream;
-    openni::VideoStream _colorStream;
-    openni::VideoFrameRef _depthFrame;
-    openni::VideoFrameRef _colorFrame;
+   
+
     int _frameIndexOffset;
     ushort * _deviceDepth;
 };
 
 }
 
-#endif // OPENNI_DEPTH_SOURCE_H
+#endif // REALSENSE_DEPTH_SOURCE_H

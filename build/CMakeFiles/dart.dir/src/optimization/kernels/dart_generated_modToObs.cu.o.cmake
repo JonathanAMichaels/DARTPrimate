@@ -77,7 +77,7 @@ set(CUDA_NVCC_FLAGS_DEBUG  ; )
 set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;-DASSIMP_BUILD;-DCUDA_BUILD;-Ddart_EXPORTS) # list
-set(CUDA_NVCC_INCLUDE_ARGS "-I/usr/local/cuda/include;-I/usr/include/eigen3;-I/home/jonathan/anaconda3/include;-I/usr/include;-I/home/jonathan/Desktop/OpenNI2/Include;-I/usr/include/assimp;-I/home/jonathan/Desktop/DARTPrimate/src;-I/usr/local/cuda/include") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_ARGS "-I/usr/local/cuda/include;-I/usr/include/eigen3;-I/home/jonathan/anaconda3/include;-I/usr/include;-I/usr/include/assimp;-I/home/jonathan/Desktop/DARTPrimate/src;-I/usr/local/cuda/include") # list (needs to be in quotes to handle spaces properly).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list
 

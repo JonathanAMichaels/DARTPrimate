@@ -18,8 +18,6 @@ find_package(OpenGL REQUIRED QUIET)
 find_package(PNG REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(DEPTHSENSE)
-find_package(OpenNI2)
 
 # find packages with pkg-config
 find_package(PkgConfig)
@@ -175,7 +173,7 @@ set(point_cloud_srcs
 
 set(depth_source_src
     ${PROJECT_SOURCE_DIR}/src/depth_sources/depth_source.h
-    ${PROJECT_SOURCE_DIR}/src/depth_sources/image_depth_source.h
+    ${PROJECT_SOURCE_DIR}/src/depth_sources/realsense_depth_source.h
 )
 
 # set conditional sources

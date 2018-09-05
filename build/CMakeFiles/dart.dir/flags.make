@@ -6,5 +6,5 @@ CXX_FLAGS = -O3 -DNDEBUG -fPIC   -std=c++11
 
 CXX_DEFINES = -DASSIMP_BUILD -DCUDA_BUILD -Ddart_EXPORTS
 
-CXX_INCLUDES = -I/usr/include/eigen3 -I/home/jonathan/anaconda3/include -I/home/jonathan/Desktop/OpenNI2/Include -I/usr/include/assimp -I/home/jonathan/Desktop/DARTPrimate/src -I/usr/local/cuda/include 
+CXX_INCLUDES = -I/usr/include/eigen3 -I/home/jonathan/anaconda3/include -I/usr/include/assimp -I/home/jonathan/Desktop/DARTPrimate/src -I/usr/local/cuda/include 
 

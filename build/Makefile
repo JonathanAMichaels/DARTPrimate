@@ -136,33 +136,6 @@ linkTarget/fast:
 	$(MAKE) -f CMakeFiles/linkTarget.dir/build.make CMakeFiles/linkTarget.dir/build
 .PHONY : linkTarget/fast
 
-src/depth_sources/openni_depth_source.o: src/depth_sources/openni_depth_source.cpp.o
-
-.PHONY : src/depth_sources/openni_depth_source.o
-
-# target to build an object file
-src/depth_sources/openni_depth_source.cpp.o:
-	$(MAKE) -f CMakeFiles/dart.dir/build.make CMakeFiles/dart.dir/src/depth_sources/openni_depth_source.cpp.o
-.PHONY : src/depth_sources/openni_depth_source.cpp.o
-
-src/depth_sources/openni_depth_source.i: src/depth_sources/openni_depth_source.cpp.i
-
-.PHONY : src/depth_sources/openni_depth_source.i
-
-# target to preprocess a source file
-src/depth_sources/openni_depth_source.cpp.i:
-	$(MAKE) -f CMakeFiles/dart.dir/build.make CMakeFiles/dart.dir/src/depth_sources/openni_depth_source.cpp.i
-.PHONY : src/depth_sources/openni_depth_source.cpp.i
-
-src/depth_sources/openni_depth_source.s: src/depth_sources/openni_depth_source.cpp.s
-
-.PHONY : src/depth_sources/openni_depth_source.s
-
-# target to generate assembly for a file
-src/depth_sources/openni_depth_source.cpp.s:
-	$(MAKE) -f CMakeFiles/dart.dir/build.make CMakeFiles/dart.dir/src/depth_sources/openni_depth_source.cpp.s
-.PHONY : src/depth_sources/openni_depth_source.cpp.s
-
 src/geometry/geometry.o: src/geometry/geometry.cpp.o
 
 .PHONY : src/geometry/geometry.o
@@ -848,9 +821,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... dart"
 	@echo "... linkTarget"
-	@echo "... src/depth_sources/openni_depth_source.o"
-	@echo "... src/depth_sources/openni_depth_source.i"
-	@echo "... src/depth_sources/openni_depth_source.s"
 	@echo "... src/geometry/geometry.o"
 	@echo "... src/geometry/geometry.i"
 	@echo "... src/geometry/geometry.s"

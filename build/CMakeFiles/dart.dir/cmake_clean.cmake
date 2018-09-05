@@ -39,7 +39,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/dart.dir/src/util/ostream_operators.cpp.o"
   "CMakeFiles/dart.dir/src/util/string_format.cpp.o"
   "CMakeFiles/dart.dir/src/mesh/assimp_mesh_reader.cpp.o"
-  "CMakeFiles/dart.dir/src/depth_sources/openni_depth_source.cpp.o"
   "../lib/libdart.pdb"
   "../lib/libdart.so"
 )

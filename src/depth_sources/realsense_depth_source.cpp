@@ -1,4 +1,4 @@
-#include "openni_depth_source.h"
+#include "realsense_depth_source.h"
 
 #include <iostream>
 #include <vector_types.h>
@@ -7,107 +7,75 @@
 
 namespace dart {
 
-OpenNIDepthSource::OpenNIDepthSource() : DepthSource<ushort,uchar3>() {
+RealSenseDepthSource::RealSenseDepthSource() : DepthSource<ushort,uchar3>() {
+     // Declare a texture for the depth image on the GPU
+    texture depth_image;
 
-    openni::OpenNI::initialize();
+    // Declare frameset and frames which will hold the data from the camera
+    rs2::frameset frames;
+    rs2::frame depth;
 
-    _deviceDepth = 0;
+     // Declare RealSense pipeline, encapsulating the actual device and sensors
+    rs2::pipeline pipe;
+
+    rs2::config cfg;
+}
+
+RealSenseDepthSource::~RealSenseDepthSource() {
+
+    
+    pipe->stop();
 
 }
 
-OpenNIDepthSource::~OpenNIDepthSource() {
+bool RealSenseDepthSource::initialize(const bool isLive) {
 
-    if (_colorStream.isValid()) {
-        _colorStream.stop();
-        _colorStream.destroy();
+    _isLive = isLive;
+  
+    // Create booleans to control GUI (recorded - allow play button, recording - show 'recording to file' text)
+    bool recorded = false;
+    bool recording = false;
+
+   
+    cfg.enable_stream(RS2_STREAM_DEPTH); // Enable default depth
+    auto profile = pipe.start(cfg);
+
+    auto sensor = profile.get_device().first<rs2::depth_sensor>();
+    
+    // TODO: At the moment the SDK does not offer a closed enum for D400 visual presets
+    // (because they keep changing)
+    // As a work-around we try to find the High-Density preset by name
+    // We do this to reduce the number of black pixels
+    // The hardware can perform hole-filling much better and much more power efficient then our software
+    auto range = sensor.get_option_range(RS2_OPTION_VISUAL_PRESET);
+    for (auto i = range.min; i < range.max; i += range.step)
+        if (std::string(sensor.get_option_value_description(RS2_OPTION_VISUAL_PRESET, i)) == "High Density")
+            sensor.set_option(RS2_OPTION_VISUAL_PRESET, i);
+
+    auto stream = profile.get_stream(RS2_STREAM_DEPTH).as<rs2::video_stream_profile>();
+    auto intrinsics = stream.get_intrinsics(); // Calibration data
+
+    // Initialize a shared pointer to a device with the current device on the pipeline
+    rs2::device device = pipe->get_active_profile().get_device();
+
+
+    // If the device is sreaming live and not from a file
+    if (!device.as<rs2::playback>())
+    {
+        frames = pipe->wait_for_frames(); // wait for next set of frames from the camera
+        depth = frames.get_depth_frame(); // Find the depth data
     }
 
-    if (_depthStream.isValid()) {
-        _depthStream.stop();
-        _depthStream.destroy();
-    }
-
-    if (_device.isValid()) {
-        _device.close();
-    }
-
-    if (_deviceDepth) {
-        cudaFree(_deviceDepth);
-    }
-
-    openni::OpenNI::shutdown();
-
-}
-
-bool OpenNIDepthSource::initialize(const char * deviceURI,
-                                   const bool getColor,
-                                   const uint depthWidth,
-                                   const uint depthHeight,
-                                   const uint depthFPS,
-                                   const uint colorWidth,
-                                   const uint colorHeight,
-                                   const uint colorFPS,
-                                   const bool mirror,
-                                   const bool frameSync,
-                                   const bool registerDepth) {
-
-    openni::Status rc = openni::STATUS_OK;
-
-    // open device
-    rc = _device.open(deviceURI);
-    if (rc != openni::STATUS_OK) {
-        std::cerr << "Could not open device: " << openni::OpenNI::getExtendedError() << std::endl;
-        return false;
-    }
-
-    _isLive = !_device.isFile();
-
-    // create depth stream
-    rc = _depthStream.create(_device, openni::SENSOR_DEPTH);
-    if (rc != openni::STATUS_OK) {
-        std::cerr << "Could not create depth stream: " << openni::OpenNI::getExtendedError() << std::endl;
-        return false;
-    }
 
     if (_isLive) {
 
-        // initialize depth stream settings
-        int targetMode = -1;
 
-        const openni::Array<openni::VideoMode>& modes = _device.getSensorInfo(openni::SENSOR_DEPTH)->getSupportedVideoModes();
-        for (int i=0; i<modes.getSize(); ++i) {
-            if (    modes[i].getResolutionX() == depthWidth &&
-                    modes[i].getResolutionY() == depthHeight &&
-                    modes[i].getPixelFormat() == openni::PIXEL_FORMAT_DEPTH_1_MM &&
-                    modes[i].getFps() == depthFPS) {
-                targetMode = i;
-                break;
-            }
-        }
 
-        if (targetMode == -1) {
-            std::cerr << "Could not find depth video mode " << depthWidth << "x" << depthHeight << "@" << depthFPS << std::endl;
-            return false;
-        }
-
-        rc = _depthStream.setVideoMode(modes[targetMode]);
-        if (rc != openni::STATUS_OK) {
-            std::cerr << "Could not set depth video mode: " << openni::OpenNI::getExtendedError() << std::endl;
-            return false;
-        }
-
-        rc = _depthStream.setMirroringEnabled(mirror);
-        if (rc != openni::STATUS_OK) {
-            std::cerr << "Could not set depth mirroring mode: " << openni::OpenNI::getExtendedError() << std::endl;
-            return false;
-        }
-
-        _depthWidth = depthWidth;
-        _depthHeight = depthHeight;
+        _depthWidth = stream.width();
+        _depthHeight = stream.height();
 
     } else {
 
-        openni::VideoMode depthMode = _depthStream.getVideoMode();
 
         _depthWidth = depthMode.getResolutionX();
         _depthHeight = depthMode.getResolutionY();
@@ -119,133 +87,40 @@ bool OpenNIDepthSource::initialize(const char * deviceURI,
 
     cudaMalloc(&_deviceDepth,_depthWidth*_depthHeight*sizeof(ushort));
 
-    if (getColor) {
-
-        // create color stream
-        rc = _colorStream.create(_device, openni::SENSOR_COLOR);
-        if (rc != openni::STATUS_OK) {
-            std::cerr << "Could not create color stream: " << openni::OpenNI::getExtendedError() << std::endl;
-            return false;
-        }
-
-        if (_isLive) {
-
-            // initialize color stream settings
-            int targetMode = -1;
-
-            const openni::Array<openni::VideoMode>& modes = _device.getSensorInfo(openni::SENSOR_COLOR)->getSupportedVideoModes();
-            for (int i=0; i<modes.getSize(); ++i) {
-                if (    modes[i].getResolutionX() == colorWidth &&
-                        modes[i].getResolutionY() == colorHeight &&
-                        modes[i].getPixelFormat() == openni::PIXEL_FORMAT_RGB888 &&
-                        modes[i].getFps() == colorFPS) {
-                    targetMode = i;
-                    break;
-                }
-            }
-
-            if (targetMode == -1) {
-                std::cerr << "Could not find color video mode " << colorWidth << "x" << colorHeight << "@" << colorFPS << std::endl;
-                return false;
-            }
-
-            rc = _colorStream.setVideoMode(modes[targetMode]);
-            if (rc != openni::STATUS_OK) {
-                std::cerr << "Could not set color video mode: " << openni::OpenNI::getExtendedError() << std::endl;
-                return false;
-            }
-
-            rc = _colorStream.setMirroringEnabled(mirror);
-            if (rc != openni::STATUS_OK) {
-                std::cerr << "Could not set color mirroring mode: " << openni::OpenNI::getExtendedError() << std::endl;
-                return false;
-            }
-
-            rc = _device.setDepthColorSyncEnabled(frameSync);
-            if (rc != openni::STATUS_OK) {
-                std::cerr << "Could not set frame sync: " << openni::OpenNI::getExtendedError() << std::endl;
-                return false;
-            }
-
-            rc = _device.setImageRegistrationMode(registerDepth ? openni::IMAGE_REGISTRATION_DEPTH_TO_COLOR : openni::IMAGE_REGISTRATION_OFF);
-            if (rc != openni::STATUS_OK) {
-                std::cerr << "Could not set registration mode: " << openni::OpenNI::getExtendedError() << std::endl;
-                return false;
-            }
-
-            _colorWidth = colorWidth;
-            _colorHeight = colorHeight;
-            _hasColor = true;
-
-        }
-        else {
-
-            openni::VideoMode colorMode = _colorStream.getVideoMode();
-
-            _colorWidth = colorMode.getResolutionX();
-            _colorHeight = colorMode.getResolutionY();
-            _hasColor = true;
-
-        }
-
-    }
-
-    rc = _depthStream.start();
-    if (rc != openni::STATUS_OK || !_depthStream.isValid()) {
-        std::cerr << "Could not start depth stream: " << openni::OpenNI::getExtendedError() << std::endl;
-        return false;
-    }
-
-    if (getColor) {
-        rc = _colorStream.start();
-        if (rc != openni::STATUS_OK || !_colorStream.isValid()) {
-            std::cerr << "Could not start depth stream: " << openni::OpenNI::getExtendedError() << std::endl;
-            return false;
-        }
-    }
-
-    if (!_isLive) {
-        openni::PlaybackControl *pc = _device.getPlaybackControl();
-        pc->setSpeed(-1);
-    }
-
     _hasTimestamps = true;
     _frame = 0;
 
-    _depthStream.readFrame(&_depthFrame);
-    _frameIndexOffset = _depthFrame.getFrameIndex();
-    if (_hasColor) {
-        _colorStream.readFrame(&_colorFrame);
-    }
+   // _frameIndexOffset = _depthFrame.getFrameIndex();
+
 
 }
 
-const ushort * OpenNIDepthSource::getDepth() const {
+const ushort * RealSenseDepthSource::getDepth() const {
     return (ushort *)_depthFrame.getData();
 }
 
-const ushort * OpenNIDepthSource::getDeviceDepth() const {
+const ushort * RealSenseDepthSource::getDeviceDepth() const {
     return (ushort *)_deviceDepth;
 }
 
-const uchar3 * OpenNIDepthSource::getColor() const {
+const uchar3 * RealSenseDepthSource::getColor() const {
     return (uchar3 *)_colorFrame.getData();
 }
 
-uint64_t OpenNIDepthSource::getDepthTime() const {
+uint64_t RealSenseDepthSource::getDepthTime() const {
     return _depthFrame.getTimestamp();
 }
 
-uint64_t OpenNIDepthSource::getColorTime() const {
+uint64_t RealSenseDepthSource::getColorTime() const {
     return _colorFrame.getTimestamp();
 }
 
-void OpenNIDepthSource::setFrame(const uint frame) {
+void RealSenseDepthSource::setFrame(const uint frame) {
 
     if (_isLive)
         return;
 
-    openni::PlaybackControl * pc = _device.getPlaybackControl();
+    RealSense::PlaybackControl * pc = _device.getPlaybackControl();
 
     pc->seek(_depthStream,frame + _frameIndexOffset);
 
@@ -253,7 +128,7 @@ void OpenNIDepthSource::setFrame(const uint frame) {
 
 }
 
-void OpenNIDepthSource::advance() {
+void RealSenseDepthSource::advance() {
 
     _depthStream.readFrame(&_depthFrame);
     _frame = _depthFrame.getFrameIndex() - _frameIndexOffset;
