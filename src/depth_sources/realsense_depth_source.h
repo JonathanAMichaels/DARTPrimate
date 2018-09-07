@@ -37,7 +37,10 @@ public:
     float getScaleToMeters() const { return _scaleToMeters; }
 
 private:
-    rs2::pipeline pipe;
+    std::shared_ptr<rs2::pipeline> pipe;
+
+    
+
     rs2::frameset frames;
     rs2::frame depth;
     float _scaleToMeters;
@@ -49,19 +52,18 @@ private:
 
 template <typename DepthType, typename ColorType>
 RealSenseDepthSource<DepthType,ColorType>::RealSenseDepthSource() : DepthSource<ushort,uchar3>() {
-    std::cout << "-1" << std::endl;
+
 }
 
 template <typename DepthType, typename ColorType>
 RealSenseDepthSource<DepthType,ColorType>::~RealSenseDepthSource() {
-    pipe.stop();
+    pipe->stop();
     delete _depthData;
 }
 
 template <typename DepthType, typename ColorType>
 bool RealSenseDepthSource<DepthType,ColorType>::initialize(const bool isLive) {
 
-    this->_scaleToMeters = 1;
     this->_frame = 0;
     this->_isLive = isLive;
 
@@ -72,37 +74,34 @@ bool RealSenseDepthSource<DepthType,ColorType>::initialize(const bool isLive) {
     }
     else
     {
-        cfg.enable_device_from_file("/home/jonathan/Documents/test.bag");
+        //rs2::playback playback = device.as<rs2::playback>();
+        cfg.enable_device_from_file("/home/jonathan/Downloads/mocap-high-res.bag");
     }
-    auto profile = pipe.start(cfg);
+    std::cout << "0" << std::endl;
+    pipe = std::make_shared<rs2::pipeline>();
+    std::cout << "1" << std::endl;
+    auto profile = pipe->start(cfg); // File will be opened in read mode at this point
+    std::cout << "2" << std::endl;
+    rs2::device device = pipe->get_active_profile().get_device();  
     auto sensor = profile.get_device().first<rs2::depth_sensor>();
 
-    this->_scaleToMeters = (float)1.0;
-    
-    // TODO: At the moment the SDK does not offer a closed enum for D400 visual presets
-    // (because they keep changing)
-    // As a work-around we try to find the High-Density preset by name
-    // We do this to reduce the number of black pixels
-    // The hardware can perform hole-filling much better and much more power efficient then our software
+    this->_depth_scale = rs2::context().query_devices().front()
+        .query_sensors().front().get_option(RS2_OPTION_DEPTH_UNITS);
 
-    //auto range = sensor.get_option_range(RS2_OPTION_VISUAL_PRESET);
-    //for (auto i = range.min; i < range.max; i += range.step)
-    //    if (std::string(sensor.get_option_value_description(RS2_OPTION_VISUAL_PRESET, i)) == "High Density")
-    //        sensor.set_option(RS2_OPTION_VISUAL_PRESET, i);
+    this->_scaleToMeters = (float)this->_depth_scale;
+    
     auto stream = profile.get_stream(RS2_STREAM_DEPTH).as<rs2::video_stream_profile>();
     auto intrinsics = stream.get_intrinsics(); // Calibration data
-    // Initialize a shared pointer to a device with the current device on the pipeline
-    rs2::device device = pipe.get_active_profile().get_device();
 
     // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
-        frames = pipe.wait_for_frames(); // wait for next set of frames from the camera
+        frames = pipe->wait_for_frames(); // wait for next set of frames from the camera
     }
     else
-    //{
-    //    frames = pipe.poll_for_frames();
-    //}
+    {
+        pipe->poll_for_frames(&frames);
+    }
     depth = frames.get_depth_frame(); // Find the depth data
 
     this->_depthWidth = stream.width();
@@ -111,9 +110,7 @@ bool RealSenseDepthSource<DepthType,ColorType>::initialize(const bool isLive) {
 
     this->_focalLength = make_float2(intrinsics.fx,intrinsics.fy);
     this->_principalPoint = make_float2(intrinsics.ppx,intrinsics.ppy);
-    
-    this->_depth_scale = rs2::context().query_devices().front()
-        .query_sensors().front().get_option(RS2_OPTION_DEPTH_UNITS);
+
 
     _depthData = new MirroredVector<DepthType>(this->_depthWidth*this->_depthHeight);
     
@@ -125,7 +122,7 @@ bool RealSenseDepthSource<DepthType,ColorType>::initialize(const bool isLive) {
         auto xx = this->_depthWidth-1;
         for (auto x = 0; x < this->_depthWidth; x++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx] * this->_depth_scale;
+            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
             xx -= 1;
         }
         yy -= 1;
@@ -155,14 +152,15 @@ void RealSenseDepthSource<DepthType,ColorType>::advance() {
 
     this->_frame++;
 
+        // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
-        frames = pipe.wait_for_frames(); // wait for next set of frames from the camera
+        frames = pipe->wait_for_frames(); // wait for next set of frames from the camera
     }
-    //else
-    //{
-     //   frames = pipe.poll_for_frames();
-   // }
+    else
+    {
+        pipe->poll_for_frames(&frames);
+    }
     depth = frames.get_depth_frame(); // Find the depth data
     
     auto pixels = (uint16_t*)depth.get_data();    
@@ -172,7 +170,7 @@ void RealSenseDepthSource<DepthType,ColorType>::advance() {
         auto xx = this->_depthWidth-1;
         for (auto x = 0; x < this->_depthWidth; x++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx] * this->_depth_scale;
+            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
             xx -= 1;
         }
         yy -= 1;

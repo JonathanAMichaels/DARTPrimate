@@ -216,8 +216,7 @@ int main() {
 
     // initialize depth source
     dart::RealSenseDepthSource<ushort,uchar3> *depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
-    const static bool isLive = false;
-    depthSource->initialize(isLive);
+    depthSource->initialize(false);
     // ----
 
     tracker.addDepthSource(depthSource);
