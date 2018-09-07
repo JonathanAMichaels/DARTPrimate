@@ -215,12 +215,9 @@ int main() {
     std::vector<pangolin::Var<float> *> sizeVars;
 
     // initialize depth source
-    std::cout << "YAY" << std::endl;
-    dart::RealSenseDepthSource<ushort,uchar3> * depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
-    
-    depthSource->initialize(true);
-    std::cout << "YAY" << std::endl;
-
+    dart::RealSenseDepthSource<ushort,uchar3> *depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
+    const static bool isLive = false;
+    depthSource->initialize(isLive);
     // ----
 
     tracker.addDepthSource(depthSource);
@@ -230,13 +227,12 @@ int main() {
     const static float obsSdfResolution = 0.01*32/obsSdfSize;
     const static float defaultModelSdfResolution = 2e-3; //1.5e-3;
     const static float3 obsSdfOffset = make_float3(0,0,0.1);
-    std::cout << "Y" << std::endl;
+
     pangolin::Var<float> modelSdfResolution("lim.modelSdfResolution",defaultModelSdfResolution,defaultModelSdfResolution/2,defaultModelSdfResolution*2);
     pangolin::Var<float> modelSdfPadding("lim.modelSdfPadding",defaultModelSdfPadding,defaultModelSdfPadding/2,defaultModelSdfPadding*2);
-    std::cout << "Y2" << std::endl;
+
     dart::ParamMapPoseReduction * handPoseReduction = dart::loadParamMapPoseReduction("../models/spaceJustin/justinHandParamMap.txt");
 
-    std::cout << "Y3" << std::endl;
     tracker.addModel("../models/spaceJustin/spaceJustinHandRight.xml",
                      modelSdfResolution,
                      modelSdfPadding,
@@ -244,7 +240,7 @@ int main() {
                      obsSdfResolution,
                      make_float3(-0.5*obsSdfSize*obsSdfResolution) + obsSdfOffset, //);
                      handPoseReduction);
-    std::cout << "Y4" << std::endl;
+
     dart::PosePrior reportedPosePrior(tracker.getPose(0).getReducedDimensions());
     memset(reportedPosePrior.getWeights(),0,6*sizeof(float));
 
@@ -257,7 +253,7 @@ int main() {
 
     dart::Pose spaceJustinPose(justinPoseReduction);
 //    std::cout << spaceJustinPose.getReducedArticulatedDimensions() << " full justin articulated dimensions" << std::endl;
-    std::cout << "Y3" << std::endl;
+
     tracker.addModel(objectModelFile,
                      0.5*modelSdfResolution,
                      modelSdfPadding,
@@ -904,6 +900,7 @@ int main() {
         glDisable(GL_LIGHTING);
         glColor4ub(255,255,255,255);
 
+
         switch (debugImg) {
             case DebugColor:
             {
@@ -915,9 +912,10 @@ int main() {
             break;
         case DebugObsDepth:
             {
+                
+                static const float depthMin = 0.1;
+                static const float depthMax = 5.0;
 
-                static const float depthMin = 0.3;
-                static const float depthMax = 1.0;
 
                 const unsigned short * depth = depthSource->getDepth();
 

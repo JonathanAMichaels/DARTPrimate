@@ -304,6 +304,9 @@ PNG_PNG_INCLUDE_DIR:PATH=/home/jonathan/anaconda3/include
 //The directory containing a CMake configuration file for Pangolin.
 Pangolin_DIR:PATH=/home/jonathan/Desktop/Pangolin/build/src
 
+//Path to a library.
+REALSENSE2:FILEPATH=REALSENSE2-NOTFOUND
+
 //Path to a file.
 ZLIB_INCLUDE_DIR:PATH=/home/jonathan/anaconda3/include
 

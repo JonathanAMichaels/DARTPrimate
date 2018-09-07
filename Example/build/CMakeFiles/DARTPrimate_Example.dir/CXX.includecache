@@ -71,6 +71,8 @@ librealsense2/rs.hpp
 -
 vector_types.h
 -
+util/mirrored_memory.h
+/home/jonathan/Desktop/DARTPrimate/src/depth_sources/util/mirrored_memory.h
 
 /home/jonathan/Desktop/DARTPrimate/src/geometry/SE3.h
 math.h

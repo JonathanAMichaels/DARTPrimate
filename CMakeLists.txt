@@ -1,5 +1,5 @@
 project("dart")
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1.0)
 
 # build release if not explicitly told to build debug
 if(NOT CMAKE_BUILD_TYPE)
@@ -43,6 +43,8 @@ link_libraries(
     ${tinyxml_LIBRARIES}
     ${matheval_LIBRARIES}
 )
+
+find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
 
 foreach(dir ${PNG_INCLUDE_DIRS})
     message(STATUS "dir='${dir}'")
@@ -172,40 +174,9 @@ set(point_cloud_srcs
 )
 
 set(depth_source_src
-    ${PROJECT_SOURCE_DIR}/src/depth_sources/depth_source.h
-    ${PROJECT_SOURCE_DIR}/src/depth_sources/realsense_depth_source.h
+    #${PROJECT_SOURCE_DIR}/src/depth_sources/depth_source.h
+    #${PROJECT_SOURCE_DIR}/src/depth_sources/realsense_depth_source.h save this for compilation of example
 )
-
-# set conditional sources
-if(OPENNI2_FOUND)
-    include_directories(${OPENNI2_INCLUDE_DIRS})
-    link_directories(${OPENNI2_REDIST_DIR})
-    link_libraries(${OPENNI2_LIBRARY})
-    set(depth_source_src
-        ${depth_source_src}
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/openni_depth_source.h
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/openni_depth_source.cpp
-    )
-endif()
-
-if(DEPTHSENSE_FOUND)
-    add_definitions(-DHAS_INTEL)
-    include_directories(${DEPTHSENSE_INCLUDE_DIR})
-    link_libraries(${DEPTHSENSE_LIBRARIES})
-    set(depth_source_src
-        ${depth_source_src}
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/depthsense_depth_source.h
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/depthsense_depth_source.cpp
-    )
-endif()
-
-if(PMD_FOUND)
-    set(depth_source_src
-        ${depth_source_src}
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/pmd_depth_source.h
-        ${PROJECT_SOURCE_DIR}/src/depth_sources/pmd_depth_source.cpp
-    )
-endif()
 
 if(assimp_FOUND)
     link_libraries(${assimp_LIBRARIES})

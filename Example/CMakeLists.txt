@@ -38,7 +38,11 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/src
 )
 
-
+find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
+set(DEPENDENCIES realsense2)
+    if(NOT WIN32)
+        list(APPEND DEPENDENCIES m ${LIBUSB1_LIBRARIES})
+    endif()
 
 ##########################################################################
 #   Build GPU or CPU-only executable depending on cuda                   #
@@ -60,6 +64,7 @@ cuda_add_executable(
     ${all_sources}
     #main
     DARTPrimate_Example.cpp
+  #  ${DART_ROOT}/src/depth_sources/realsense_depth_source.cpp
 )
 target_link_libraries(DARTPrimate_Example dart)
 
