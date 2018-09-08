@@ -54,9 +54,6 @@ enum DebugImgs {
 
 const static int panelWidth = 180;
 
-static const int fullArmFingerTipFrames[10] = { 11, 15, 19, 23, 27,  38, 42, 46, 50, 54 };
-static const int handFingerTipFrames[5] = { 4, 8, 12, 16, 20 };
-
 void setSlidersFromTransform(dart::SE3& transform, pangolin::Var<float>** sliders) {
     *sliders[0] = transform.r0.w; transform.r0.w = 0;
     *sliders[1] = transform.r1.w; transform.r1.w = 0;
@@ -80,8 +77,6 @@ static float3 initialTableNorm = make_float3(0.0182391, 0.665761, -0.745942);
 static float initialTableIntercept = -0.705196;
 
 int main() {
-
-  
     const float objObsSdfRes = 0.0025;
     const float3 objObsSdfOffset = make_float3(0,0,0);
 
@@ -247,7 +242,6 @@ int main() {
     pangolin::Var<float> tableNormZ("opt.tableNormZ",initialTableNorm.z,-1,1);
     pangolin::Var<float> tableIntercept("opt.tableIntercept",initialTableIntercept,-1,1);
 
-    static pangolin::Var<bool> fitTable("opt.fitTable",true,true);
     static pangolin::Var<bool> subtractTable("opt.subtractTable",true,true);
 
 
@@ -288,8 +282,6 @@ int main() {
     opts.planeNormal[2] = make_float3(0,0,1);
     opts.planeNormal[1] = make_float3(0,0,0);
     opts.regularization[0] = opts.regularization[1] = opts.regularization[2] = 0.01;
-
-
 
     dart::MirroredModel & arm = tracker.getModel(0);
     dart::Pose & armPose = tracker.getPose(0);
