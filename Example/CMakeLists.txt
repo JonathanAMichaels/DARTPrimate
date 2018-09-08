@@ -19,14 +19,17 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DART_ROOT}/CMakeModules/")
 find_package(Pangolin REQUIRED)
 find_package(PNG REQUIRED)
 find_package(CUDA REQUIRED)
+find_package(GLUT REQUIRED)
 
 # find packages with pkg-config
 find_package(PkgConfig)
 pkg_check_modules(eigen3 REQUIRED eigen3)
 pkg_check_modules(matheval REQUIRED libmatheval)
 
-include_directories(  ${PNG_INCLUDE_DIRS})
-link_libraries(       ${PNG_LIBRARIES})
+include_directories(  ${PNG_INCLUDE_DIRS}
+		      ${GLUT_INCLUDE_DIR})
+link_libraries(       ${PNG_LIBRARIES}
+		      ${GLUT_glut_LIBRARY})
 
 include_directories(  ${Pangolin_INCLUDE_DIRS} )
 link_directories(     ${Pangolin_LIBRARY_DIRS} )

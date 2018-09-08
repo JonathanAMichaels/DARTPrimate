@@ -509,6 +509,7 @@ void Optimizer::optimizePose(MirroredModel & model,
 
         pose.projectReducedToFull();
         pose.setTransformCameraToModel(new_T_mc);
+        //pose.setTransformCameraToModel(T_mc);
         model.setPose(pose);
 
     }
@@ -743,6 +744,7 @@ void Optimizer::optimizePoses(std::vector<MirroredModel *> & models,
             }
 
             pose.setTransformCameraToModel(new_T_mc);
+            //pose.setTransformCameraToModel(T_mc);
             pose.projectReducedToFull();
             model.setPose(pose);
         }

@@ -92,6 +92,7 @@ DARTPrimate_Example: CMakeFiles/DARTPrimate_Example.dir/DARTPrimate_Example.cpp.
 DARTPrimate_Example: CMakeFiles/DARTPrimate_Example.dir/build.make
 DARTPrimate_Example: /home/jonathan/anaconda3/lib/libpng.so
 DARTPrimate_Example: /home/jonathan/anaconda3/lib/libz.so
+DARTPrimate_Example: /usr/lib/x86_64-linux-gnu/libglut.so
 DARTPrimate_Example: /home/jonathan/Desktop/Pangolin/build/src/libpangolin.so
 DARTPrimate_Example: /usr/local/cuda/lib64/libcudart_static.a
 DARTPrimate_Example: /usr/lib/x86_64-linux-gnu/librt.so

@@ -29,6 +29,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.5/Modules/Compiler/GNU-CXX.cmake"
   "/usr/share/cmake-3.5/Modules/Compiler/GNU.cmake"
   "/usr/share/cmake-3.5/Modules/FindCUDA.cmake"
+  "/usr/share/cmake-3.5/Modules/FindGLUT.cmake"
   "/usr/share/cmake-3.5/Modules/FindPNG.cmake"
   "/usr/share/cmake-3.5/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake-3.5/Modules/FindPackageMessage.cmake"
