@@ -10,7 +10,7 @@ endif()
 add_definitions(-std=c++11)
 
 # set CMakeModule path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/CMakeModules/")
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/CMakeModules/")
 
 # find packages with modules
 find_package(CUDA REQUIRED)
@@ -44,7 +44,7 @@ link_libraries(
     ${matheval_LIBRARIES}
 )
 
-find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
+#find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
 
 foreach(dir ${PNG_INCLUDE_DIRS})
     message(STATUS "dir='${dir}'")
@@ -195,7 +195,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/)
 set(BUILD_SHARED_LIBS ON)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
-set(CUDA_NVCC_FLAGS "-arch=sm_35" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
+set(CUDA_NVCC_FLAGS "-arch=sm_60" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
 
 # add library
 if (CUDA_FOUND)

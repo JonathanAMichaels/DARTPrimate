@@ -273,18 +273,7 @@ CMakeFiles/dart.dir/src/geometry/geometry.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -292,7 +281,11 @@ CMakeFiles/dart.dir/src/geometry/geometry.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -301,6 +294,10 @@ CMakeFiles/dart.dir/src/geometry/geometry.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -532,18 +529,7 @@ CMakeFiles/dart.dir/src/geometry/plane_fitting.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -551,7 +537,11 @@ CMakeFiles/dart.dir/src/geometry/plane_fitting.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -560,6 +550,10 @@ CMakeFiles/dart.dir/src/geometry/plane_fitting.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -598,18 +592,7 @@ CMakeFiles/dart.dir/src/geometry/sdf.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -617,7 +600,11 @@ CMakeFiles/dart.dir/src/geometry/sdf.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -626,6 +613,10 @@ CMakeFiles/dart.dir/src/geometry/sdf.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -658,7 +649,6 @@ CMakeFiles/dart.dir/src/mesh/assimp_mesh_reader.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/mesh/assimp_mesh_reader.cpp
  /home/jonathan/Desktop/DARTPrimate/src/mesh/assimp_mesh_reader.h
  /usr/local/cuda/include/builtin_types.h
- /usr/local/cuda/include/crt/host_defines.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
@@ -670,8 +660,12 @@ CMakeFiles/dart.dir/src/mesh/assimp_mesh_reader.cpp.o
 CMakeFiles/dart.dir/src/mesh/mesh.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/mesh/mesh.cpp
  /home/jonathan/Desktop/DARTPrimate/src/mesh/mesh.h
- /usr/local/cuda/include/crt/host_defines.h
+ /usr/local/cuda/include/builtin_types.h
+ /usr/local/cuda/include/device_types.h
+ /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
+ /usr/local/cuda/include/surface_types.h
+ /usr/local/cuda/include/texture_types.h
  /usr/local/cuda/include/vector_types.h
 CMakeFiles/dart.dir/src/mesh/mesh_proc.cpp.o
  ../src/geometry/SE3.h
@@ -680,7 +674,6 @@ CMakeFiles/dart.dir/src/mesh/mesh_proc.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/mesh/mesh_proc.cpp
  /home/jonathan/Desktop/DARTPrimate/src/mesh/mesh_proc.h
  /usr/local/cuda/include/builtin_types.h
- /usr/local/cuda/include/crt/host_defines.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
@@ -697,18 +690,7 @@ CMakeFiles/dart.dir/src/mesh/mesh_sample.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -716,7 +698,11 @@ CMakeFiles/dart.dir/src/mesh/mesh_sample.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -725,6 +711,10 @@ CMakeFiles/dart.dir/src/mesh/mesh_sample.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -761,18 +751,7 @@ CMakeFiles/dart.dir/src/mesh/mesh_splat.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -780,7 +759,11 @@ CMakeFiles/dart.dir/src/mesh/mesh_splat.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -789,6 +772,10 @@ CMakeFiles/dart.dir/src/mesh/mesh_splat.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -822,18 +809,7 @@ CMakeFiles/dart.dir/src/mesh/primitive_meshing.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -841,7 +817,11 @@ CMakeFiles/dart.dir/src/mesh/primitive_meshing.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -850,6 +830,10 @@ CMakeFiles/dart.dir/src/mesh/primitive_meshing.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -900,18 +884,7 @@ CMakeFiles/dart.dir/src/model/host_only_model.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -919,7 +892,11 @@ CMakeFiles/dart.dir/src/model/host_only_model.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -928,6 +905,10 @@ CMakeFiles/dart.dir/src/model/host_only_model.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -974,18 +955,7 @@ CMakeFiles/dart.dir/src/model/mirrored_model.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -993,7 +963,11 @@ CMakeFiles/dart.dir/src/model/mirrored_model.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -1002,6 +976,10 @@ CMakeFiles/dart.dir/src/model/mirrored_model.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -1309,18 +1287,7 @@ CMakeFiles/dart.dir/src/model/model.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -1328,7 +1295,11 @@ CMakeFiles/dart.dir/src/model/model.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -1337,6 +1308,10 @@ CMakeFiles/dart.dir/src/model/model.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -1581,18 +1556,7 @@ CMakeFiles/dart.dir/src/optimization/contact_prior.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -1600,7 +1564,11 @@ CMakeFiles/dart.dir/src/optimization/contact_prior.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -1609,6 +1577,10 @@ CMakeFiles/dart.dir/src/optimization/contact_prior.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -1931,18 +1903,7 @@ CMakeFiles/dart.dir/src/optimization/optimizer.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -1950,7 +1911,11 @@ CMakeFiles/dart.dir/src/optimization/optimizer.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -1959,6 +1924,10 @@ CMakeFiles/dart.dir/src/optimization/optimizer.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2203,18 +2172,7 @@ CMakeFiles/dart.dir/src/optimization/point_2d_3d_prior.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -2222,7 +2180,11 @@ CMakeFiles/dart.dir/src/optimization/point_2d_3d_prior.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -2231,6 +2193,10 @@ CMakeFiles/dart.dir/src/optimization/point_2d_3d_prior.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2475,18 +2441,7 @@ CMakeFiles/dart.dir/src/optimization/point_3d_3d_prior.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -2494,7 +2449,11 @@ CMakeFiles/dart.dir/src/optimization/point_3d_3d_prior.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -2503,6 +2462,10 @@ CMakeFiles/dart.dir/src/optimization/point_3d_3d_prior.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2552,18 +2515,7 @@ CMakeFiles/dart.dir/src/optimization/prediction_renderer.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_gl_interop.h
  /usr/local/cuda/include/cuda_runtime.h
@@ -2572,7 +2524,11 @@ CMakeFiles/dart.dir/src/optimization/prediction_renderer.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -2581,6 +2537,10 @@ CMakeFiles/dart.dir/src/optimization/prediction_renderer.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2620,18 +2580,7 @@ CMakeFiles/dart.dir/src/pose/pose.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -2639,7 +2588,11 @@ CMakeFiles/dart.dir/src/pose/pose.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -2648,6 +2601,10 @@ CMakeFiles/dart.dir/src/pose/pose.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2906,18 +2863,7 @@ CMakeFiles/dart.dir/src/tracker.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_gl_interop.h
  /usr/local/cuda/include/cuda_runtime.h
@@ -2926,7 +2872,11 @@ CMakeFiles/dart.dir/src/tracker.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -2935,6 +2885,10 @@ CMakeFiles/dart.dir/src/tracker.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -2981,18 +2935,7 @@ CMakeFiles/dart.dir/src/util/dart_io.cpp.o
  /usr/local/cuda/include/builtin_types.h
  /usr/local/cuda/include/channel_descriptor.h
  /usr/local/cuda/include/common_functions.h
- /usr/local/cuda/include/crt/common_functions.h
- /usr/local/cuda/include/crt/device_double_functions.h
- /usr/local/cuda/include/crt/device_double_functions.hpp
- /usr/local/cuda/include/crt/device_functions.h
- /usr/local/cuda/include/crt/device_functions.hpp
  /usr/local/cuda/include/crt/func_macro.h
- /usr/local/cuda/include/crt/host_config.h
- /usr/local/cuda/include/crt/host_defines.h
- /usr/local/cuda/include/crt/math_functions.h
- /usr/local/cuda/include/crt/math_functions.hpp
- /usr/local/cuda/include/crt/sm_70_rt.h
- /usr/local/cuda/include/crt/sm_70_rt.hpp
  /usr/local/cuda/include/cuda_device_runtime_api.h
  /usr/local/cuda/include/cuda_runtime.h
  /usr/local/cuda/include/cuda_runtime_api.h
@@ -3000,7 +2943,11 @@ CMakeFiles/dart.dir/src/util/dart_io.cpp.o
  /usr/local/cuda/include/cuda_texture_types.h
  /usr/local/cuda/include/device_atomic_functions.h
  /usr/local/cuda/include/device_atomic_functions.hpp
+ /usr/local/cuda/include/device_double_functions.h
+ /usr/local/cuda/include/device_double_functions.hpp
  /usr/local/cuda/include/device_functions.h
+ /usr/local/cuda/include/device_functions.hpp
+ /usr/local/cuda/include/device_functions_decls.h
  /usr/local/cuda/include/device_launch_parameters.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_functions.h
@@ -3009,6 +2956,10 @@ CMakeFiles/dart.dir/src/util/dart_io.cpp.o
  /usr/local/cuda/include/host_defines.h
  /usr/local/cuda/include/library_types.h
  /usr/local/cuda/include/math_constants.h
+ /usr/local/cuda/include/math_functions.h
+ /usr/local/cuda/include/math_functions.hpp
+ /usr/local/cuda/include/math_functions_dbl_ptx3.h
+ /usr/local/cuda/include/math_functions_dbl_ptx3.hpp
  /usr/local/cuda/include/sm_20_atomic_functions.h
  /usr/local/cuda/include/sm_20_atomic_functions.hpp
  /usr/local/cuda/include/sm_20_intrinsics.h
@@ -3040,7 +2991,6 @@ CMakeFiles/dart.dir/src/util/gl_dart.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/util/gl_dart.cpp
  /home/jonathan/Desktop/DARTPrimate/src/util/gl_dart.h
  /usr/local/cuda/include/builtin_types.h
- /usr/local/cuda/include/crt/host_defines.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
@@ -3055,8 +3005,12 @@ CMakeFiles/dart.dir/src/util/image_io.cpp.o
  /home/jonathan/anaconda3/include/png.h
  /home/jonathan/anaconda3/include/pngconf.h
  /home/jonathan/anaconda3/include/pnglibconf.h
- /usr/local/cuda/include/crt/host_defines.h
+ /usr/local/cuda/include/builtin_types.h
+ /usr/local/cuda/include/device_types.h
+ /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
+ /usr/local/cuda/include/surface_types.h
+ /usr/local/cuda/include/texture_types.h
  /usr/local/cuda/include/vector_types.h
 CMakeFiles/dart.dir/src/util/model_renderer.cpp.o
  ../src/mesh/mesh.h
@@ -3064,8 +3018,12 @@ CMakeFiles/dart.dir/src/util/model_renderer.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/util/dart_types.h
  /home/jonathan/Desktop/DARTPrimate/src/util/model_renderer.cpp
  /home/jonathan/Desktop/DARTPrimate/src/util/model_renderer.h
- /usr/local/cuda/include/crt/host_defines.h
+ /usr/local/cuda/include/builtin_types.h
+ /usr/local/cuda/include/device_types.h
+ /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h
+ /usr/local/cuda/include/surface_types.h
+ /usr/local/cuda/include/texture_types.h
  /usr/local/cuda/include/vector_types.h
 CMakeFiles/dart.dir/src/util/ostream_operators.cpp.o
  ../src/geometry/SE3.h
@@ -3073,7 +3031,6 @@ CMakeFiles/dart.dir/src/util/ostream_operators.cpp.o
  /home/jonathan/Desktop/DARTPrimate/src/util/ostream_operators.cpp
  /home/jonathan/Desktop/DARTPrimate/src/util/ostream_operators.h
  /usr/local/cuda/include/builtin_types.h
- /usr/local/cuda/include/crt/host_defines.h
  /usr/local/cuda/include/device_types.h
  /usr/local/cuda/include/driver_types.h
  /usr/local/cuda/include/host_defines.h

@@ -581,9 +581,7 @@ template <typename DepthType, typename ColorType>
 bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
                                                      const bool isDepth) {
 
-    std::cout << "D1" << std::endl;
     FILE * file = fopen(filename,"r");
-    std::cout << "D2" << std::endl;
     unsigned char sig[8];
     int nRead = fread(sig, 1, 8, file);
     if (nRead != 8 || !(png_sig_cmp(sig,0,8)==0)) {
@@ -591,7 +589,7 @@ bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
         fclose(file);
         return false;
     }
-    std::cout << "D3" << std::endl;
+
     jmp_buf buff;
     png_structp pngPtr = png_create_read_struct(PNG_LIBPNG_VER_STRING, &buff, pngErrorHandler, NULL);
     if (!pngPtr) {
@@ -599,7 +597,7 @@ bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
         fclose(file);
         return false;
     }
-    std::cout << "D4" << std::endl;
+
     png_infop infoPtr = png_create_info_struct(pngPtr);
     if (!infoPtr) {
         png_destroy_read_struct(&pngPtr,NULL,NULL);
@@ -607,20 +605,20 @@ bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
         fclose(file);
         return false;
     }
-    std::cout << "D5" << std::endl;
+
     if (setjmp(buff)) {
         png_destroy_read_struct(&pngPtr, &infoPtr, NULL);
         fclose(file);
         return false;
     }
-    std::cout << "D6" << std::endl;
+
     png_init_io(pngPtr, file);
     png_set_sig_bytes(pngPtr, 8);
     png_read_info(pngPtr, infoPtr);
     if (_pngSwap) {
         png_set_swap(pngPtr);
     }
-    std::cout << "D7" << std::endl;
+
     png_uint_32 width, height;
     int bitDepth, colorType;
     png_get_IHDR(pngPtr, infoPtr, &width, &height, &bitDepth, &colorType, NULL, NULL, NULL);
@@ -654,7 +652,6 @@ bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
             return false;
         }
     }
-    std::cout << "D8" << std::endl;
     png_uint_32 i;
     png_bytep rowPointers[height];
 
@@ -673,13 +670,9 @@ bool ImageDepthSource<DepthType, ColorType>::readPNG(const char * filename,
             rowPointers[i] = ((png_bytep)_colorData) + i*png_get_rowbytes(pngPtr,infoPtr);
         }
     }
-    std::cout << "D9" << std::endl;
     png_read_image(pngPtr,rowPointers);
-    std::cout << "D10" << std::endl;
     png_read_end(pngPtr, NULL);
-    std::cout << "D11" << std::endl;
     png_destroy_read_struct(&pngPtr, &infoPtr, NULL);
-    std::cout << "D12" << std::endl;
     fclose(file);
     return true;
 

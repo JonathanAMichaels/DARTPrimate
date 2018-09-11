@@ -248,7 +248,7 @@ CUDA_USE_STATIC_CUDA_RUNTIME:BOOL=ON
 CUDA_VERBOSE_BUILD:BOOL=OFF
 
 //Version of CUDA as computed from nvcc.
-CUDA_VERSION:STRING=9.0
+CUDA_VERSION:STRING=8.0
 
 //"cublas" library
 CUDA_cublas_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libcublas.so
@@ -275,7 +275,7 @@ CUDA_cusparse_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libcusparse.so
 CUDA_nppc_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libnppc.so
 
 //"nppi" library
-CUDA_nppi_LIBRARY:FILEPATH=CUDA_nppi_LIBRARY-NOTFOUND
+CUDA_nppi_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libnppi.so
 
 //"npps" library
 CUDA_npps_LIBRARY:FILEPATH=/usr/local/cuda/lib64/libnpps.so
@@ -296,7 +296,7 @@ GLUT_INCLUDE_DIR:PATH=/usr/include
 GLUT_Xi_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libXi.so
 
 //Path to a library.
-GLUT_Xmu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libXmu.so
+GLUT_Xmu_LIBRARY:FILEPATH=GLUT_Xmu_LIBRARY-NOTFOUND
 
 //Path to a library.
 GLUT_glut_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libglut.so
@@ -339,9 +339,6 @@ PNG_LIBRARY_RELEASE:FILEPATH=/home/jonathan/anaconda3/lib/libpng.so
 
 //Path to a file.
 PNG_PNG_INCLUDE_DIR:PATH=/home/jonathan/anaconda3/include
-
-//Path to a library.
-REALSENSE2:FILEPATH=REALSENSE2-NOTFOUND
 
 //Path to a file.
 ZLIB_INCLUDE_DIR:PATH=/home/jonathan/anaconda3/include
@@ -580,7 +577,7 @@ CUDA_parse_cubin:INTERNAL=/usr/share/cmake-3.5/Modules/FindCUDA/parse_cubin.cmak
 //Location of run_nvcc.cmake
 CUDA_run_nvcc:INTERNAL=/usr/share/cmake-3.5/Modules/FindCUDA/run_nvcc.cmake
 //Details about finding CUDA
-FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda][/usr/local/cuda/bin/nvcc][/usr/local/cuda/include][/usr/local/cuda/lib64/libcudart.so][v9.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda][/usr/local/cuda/bin/nvcc][/usr/local/cuda/include][/usr/local/cuda/lib64/libcudart.so][v8.0()]
 //Details about finding GLEW
 FIND_PACKAGE_MESSAGE_DETAILS_GLEW:INTERNAL=[/usr/include][/usr/lib/x86_64-linux-gnu/libGLEW.so][v()]
 //Details about finding GLUT

@@ -70,7 +70,7 @@ set(generated_file_internal "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles
 set(generated_cubin_file_internal "/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir/src/visualization/./dart_generated_gradient_viz.cu.o.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda/bin/nvcc") # path
-set(CUDA_NVCC_FLAGS -arch=sm_35;--use_fast_math;-O3;--ptxas-options=--verbose ;; ) # list
+set(CUDA_NVCC_FLAGS -arch=sm_60;--use_fast_math;-O3;--ptxas-options=--verbose ;; ) # list
 # Build specific configuration flags
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_DEBUG  ; )
@@ -170,7 +170,7 @@ cuda_execute_process(
 # For CUDA 2.3 and below, -G -M doesn't work, so remove the -G flag
 # for dependency generation and hope for the best.
 set(depends_CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS}")
-set(CUDA_VERSION 9.0)
+set(CUDA_VERSION 8.0)
 if(CUDA_VERSION VERSION_LESS "3.0")
   cmake_policy(PUSH)
   # CMake policy 0007 NEW states that empty list elements are not

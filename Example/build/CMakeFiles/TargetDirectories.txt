@@ -1,3 +1,0 @@
-/home/jonathan/Desktop/DARTPrimate/Example/build/CMakeFiles/edit_cache.dir
-/home/jonathan/Desktop/DARTPrimate/Example/build/CMakeFiles/rebuild_cache.dir
-/home/jonathan/Desktop/DARTPrimate/Example/build/CMakeFiles/DARTPrimate_Example.dir

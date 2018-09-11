@@ -84,7 +84,25 @@ public:
     virtual const DepthType * getDeviceDepth() const = 0;
 
     virtual const ColorType * getColor() const { return 0; }
+
+    bool saveFrame(const uint frame);
 };
+
+
+
+// Implementation
+
+template <typename DepthType, typename ColorType>
+bool DepthSource<DepthType, ColorType>::saveFrame(const uint frame) {
+
+    return true;
+}
+
+
+
+
+
+
 
 }
 

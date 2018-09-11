@@ -8,7 +8,7 @@ implementation and state-of-the-art GPUs.
 Required Dependencies
 ---------------------
 
-**CUDA:** https://developer.nvidia.com/cuda-zone
+**CUDA:** install cuda8.0!!!
 
 **Eigen 3:** sudo apt-get install libeigen3-dev
 
@@ -16,20 +16,22 @@ Required Dependencies
 
 **libjpeg:** sudo apt-get install libjpeg-dev
 
-**libpng:** sudo apt-get install libpng-dev
+**libpng:** sudo apt-get install libpng16-dev (must be version 1.4 or greater)
 
 **tinyxml:** sudo apt-get install libtinyxml-dev
+
+
+**Pangolin [GUI for the examples]:** https://github.com/stevenlovegrove/Pangolin
+
 
 Optional Dependencies
 ---------------------
 
-**Pangolin [GUI for the examples]:** https://github.com/stevenlovegrove/Pangolin
-
-**OpenNI [for PrimeSense sensors]:** https://github.com/OpenNI/OpenNI2 or http://structure.io/openni
-
-**DepthSense SDK [for Intel sensor]:** sudo apt-get install depthsensesdk
+**libfreenect2:** install newest version (best without OpenCL support, since cuda 8.0 screws that up)
 
 **Open Asset Import Library:** sudo apt-get install libassimp-dev [for mesh models]
+for creating meshes we recommend KinectFusion, which can be install from here:..
+Note: OpenCV must be installed with CUDA support, which can be done as follows:.. (opencv-3.4.3 opencv-contrib-3.4.3)
 
 **gtest [for testing]:** sudo apt-get install libgtest-dev; cd /usr/src/gtest; sudo mkdir build; cd build; sudo cmake ..; sudo make; sudo mv libgtest* /usr/lib/;
 
