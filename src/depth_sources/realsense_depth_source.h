@@ -88,6 +88,11 @@ bool RealSenseDepthSource<DepthType,ColorType>::initialize(const bool isLive) {
     this->_depth_scale = rs2::context().query_devices().front()
         .query_sensors().front().get_option(RS2_OPTION_DEPTH_UNITS);
 
+    auto range = sensor.get_option_range(RS2_OPTION_VISUAL_PRESET);
+    for (auto i = range.min; i < range.max; i += range.step)
+        if (std::string(sensor.get_option_value_description(RS2_OPTION_VISUAL_PRESET, i)) == "High Accuracy")
+            sensor.set_option(RS2_OPTION_VISUAL_PRESET, i);
+
     this->_scaleToMeters = (float)this->_depth_scale;
     
     auto stream = profile.get_stream(RS2_STREAM_DEPTH).as<rs2::video_stream_profile>();
@@ -170,13 +175,15 @@ void RealSenseDepthSource<DepthType,ColorType>::advance() {
         auto xx = this->_depthWidth-1;
         for (auto x = 0; x < this->_depthWidth; x++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
+            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + x];
             xx -= 1;
         }
         yy -= 1;
     }
 
     _depthData->syncHostToDevice();
+
+    std::cout << "advance" << std::endl;
 }
 
 

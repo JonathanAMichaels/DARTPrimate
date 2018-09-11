@@ -3,7 +3,7 @@
 0 1 2 3
 -6 -6 -6 -6
 6 6 6 6
-Sho 1
-Sho 2
-Sho 3
+Sho z
+Sho y
+Sho x
 Elb Flex

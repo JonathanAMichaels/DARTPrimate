@@ -14,6 +14,8 @@
 #include <vector_types.h>
 
 #include "depth_sources/realsense_depth_source.h"
+#include "depth_sources/kinectv2_depth_source.h"
+
 #include "geometry/plane_fitting.h"
 #include "img_proc/img_ops.h"
 #include "optimization/priors.h"
@@ -76,7 +78,70 @@ const static dart::SE3 T_wc = dart::SE3FromTranslation(make_float3(-0.2,0.8,0))*
 static float3 initialTableNorm = make_float3(0.0182391, 0.665761, -0.745942);
 static float initialTableIntercept = -0.705196;
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    // Set defaults for command-line arguments
+    bool isLive = true;
+    int streamDevice = 0;
+    std::string saveDir = "";
+    std::string loadDir = "";
+
+    for (int i = 1; i < argc; ++i)
+    {
+        if (std::string(argv[i]) == "--device")
+        {
+            if (i + 1 < argc)
+            {
+                i++;
+                if (std::string(argv[i]) == "realsense")
+                {
+                    streamDevice = 1;
+                }    
+                else if (std::string(argv[i]) == "kinect")
+                {
+                    streamDevice = 0;
+                }
+                else
+                {
+                    std::cerr << "Unrecognized device specified." << std::endl;
+                    return 1;
+                }
+
+            }
+            else
+            {
+                std::cerr << "--device option requires one argument." << std::endl;
+                return 1;
+            }  
+        }
+        else if (std::string(argv[i]) == "--saveDir")
+        {
+            if (i + 1 < argc)
+            {
+                saveDir = std::string(argv[i++]);
+            }
+            else
+            {
+                std::cerr << "--saveDir option requires one argument." << std::endl;
+                return 1;
+            }  
+        }
+        else if (std::string(argv[i]) == "--loadDir")
+        {
+            if (i + 1 < argc)
+            {
+                loadDir = std::string(argv[i++]);
+                isLive = false;
+            }
+            else
+            {
+                std::cerr << "--loadDir option requires one argument." << std::endl;
+                return 1;
+            }  
+        }
+    }
+
+
     const float objObsSdfRes = 0.0025;
     const float3 objObsSdfOffset = make_float3(0,0,0);
 
@@ -138,11 +203,20 @@ int main() {
     std::vector<pangolin::Var<float> *> sizeVars;
 
     // initialize depth source
-    dart::RealSenseDepthSource<ushort,uchar3> *depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
-    depthSource->initialize(true);
-    // ----
+    dart::DepthSource<ushort,uchar3>* depthSource = NULL;
+    if (streamDevice == 0)
+    {
+        depthSource = new dart::KinectV2DepthSource<ushort,uchar3>();
+    }
+    else if (streamDevice == 1)
+    {
+        depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
+    }
+    
 
+    depthSource->initialize(isLive);
     tracker.addDepthSource(depthSource);
+
     dart::Optimizer & optimizer = *tracker.getOptimizer();
 
     const static int obsSdfSize = 64;

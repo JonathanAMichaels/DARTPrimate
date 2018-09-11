@@ -43,9 +43,18 @@ include_directories(
 
 find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
 set(DEPENDENCIES realsense2)
-    if(NOT WIN32)
-        list(APPEND DEPENDENCIES m ${LIBUSB1_LIBRARIES})
-    endif()
+
+list(APPEND DEPENDENCIES m ${LIBUSB1_LIBRARIES})
+  
+
+
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{HOME}/freenect2/lib/cmake/freenect2)
+find_package(freenect2 REQUIRED)
+
+INCLUDE_DIRECTORIES(
+  ${freenect2_INCLUDE_DIR}
+)
+
 
 ##########################################################################
 #   Build GPU or CPU-only executable depending on cuda                   #
@@ -67,8 +76,7 @@ cuda_add_executable(
     ${all_sources}
     #main
     DARTPrimate_Example.cpp
-  #  ${DART_ROOT}/src/depth_sources/realsense_depth_source.cpp
 )
-target_link_libraries(DARTPrimate_Example dart)
+target_link_libraries(DARTPrimate_Example dart ${freenect2_LIBRARIES})
 
 
