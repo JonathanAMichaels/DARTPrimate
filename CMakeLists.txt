@@ -15,43 +15,27 @@ add_definitions(-std=c++11)
 # find packages with modules
 find_package(CUDA REQUIRED)
 find_package(OpenGL REQUIRED QUIET)
-find_package(PNG REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(GLEW REQUIRED)
 
 # find packages with pkg-config
 find_package(PkgConfig)
 pkg_check_modules(eigen3 REQUIRED eigen3)
-pkg_check_modules(tinyxml REQUIRED tinyxml)
 pkg_check_modules(matheval REQUIRED libmatheval)
 pkg_check_modules(assimp assimp)
 
 include_directories(
     ${eigen3_INCLUDE_DIRS}
-    ${PNG_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIR}
     ${GLUT_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIRS}
-    ${tinyxml_INCLUDE_DIR}
 )
-link_directories(${tinyxml_LIBRARY_DIRS})
 link_libraries(
-    ${PNG_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLUT_glut_LIBRARY}
     ${GLEW_LIBRARIES}
-    ${tinyxml_LIBRARIES}
     ${matheval_LIBRARIES}
 )
-
-#find_library(REALSENSE2 PATHS "/usr/local/lib/" NO_DEFAULT_PATH REQUIRED)
-
-foreach(dir ${PNG_INCLUDE_DIRS})
-    message(STATUS "dir='${dir}'")
-endforeach()
-foreach(dir ${PNG_LIBRARIES})
-    message(STATUS "dir='${dir}'")
-endforeach()
 
 # set dart source
 set(dart_src
@@ -116,8 +100,6 @@ set(dart_src
     ${PROJECT_SOURCE_DIR}/src/util/dart_types.h
     ${PROJECT_SOURCE_DIR}/src/util/gl_dart.h
     ${PROJECT_SOURCE_DIR}/src/util/gl_dart.cpp
-    ${PROJECT_SOURCE_DIR}/src/util/image_io.h
-    ${PROJECT_SOURCE_DIR}/src/util/image_io.cpp
     ${PROJECT_SOURCE_DIR}/src/util/mirrored_memory.h
     ${PROJECT_SOURCE_DIR}/src/util/model_renderer.h
     ${PROJECT_SOURCE_DIR}/src/util/model_renderer.cpp
@@ -173,11 +155,6 @@ set(point_cloud_srcs
     ${PROJECT_SOURCE_DIR}/src/point_cloud_src/point_cloud_src.h
 )
 
-set(depth_source_src
-    #${PROJECT_SOURCE_DIR}/src/depth_sources/depth_source.h
-    #${PROJECT_SOURCE_DIR}/src/depth_sources/realsense_depth_source.h save this for compilation of example
-)
-
 if(assimp_FOUND)
     link_libraries(${assimp_LIBRARIES})
     include_directories(${assimp_INCLUDE_DIRS})
@@ -204,52 +181,13 @@ if (CUDA_FOUND)
     add_custom_target(linkTarget COMMAND ln -sf ${CUDA_TOOLKIT_ROOT_DIR}/samples/common/inc/helper_math.h ${PROJECT_SOURCE_DIR}/src/util/helper_math.h)
 
     add_definitions(-DCUDA_BUILD)
-    cuda_add_library(${PROJECT_NAME} ${dart_src} ${point_cloud_srcs} ${depth_source_src} ${gpu_specific_src})
+    cuda_add_library(${PROJECT_NAME} ${dart_src} ${point_cloud_srcs} ${gpu_specific_src})
     add_dependencies(${PROJECT_NAME} linkTarget)
 
     message(STATUS "ln -s ${CUDA_TOOLKIT_ROOT_DIR}/samples/common/inc/helper_math.h ${PROJECT_SOURCE_DIR}/src/util/helper_math.h")
 
 
 else()
-    add_library(${PROJECT_NAME} ${dart_src} ${point_cloud_srcs} ${depth_source_src} ${cpu_specific_src})
+    add_library(${PROJECT_NAME} ${dart_src} ${point_cloud_srcs} ${cpu_specific_src})
 endif()
 
-# testing
-find_package(GTest)
-set(BUILD_TESTS OFF CACHE BOOL "build the tests (requires gtest)")
-if(${BUILD_TESTS} AND ${GTEST_FOUND})
-    message(STATUS "building tests")
-
-    find_package(Threads REQUIRED QUIET)
-
-    include_directories(${GTEST_INCLUDE_DIRS})
-    link_directories(${GTEST_LIBRARIES})
-    link_libraries(gtest pthread)
-
-    set(test_sources
-        test/test_model_jacobian.cpp
-        test/test_obs_to_mod_kernels.cpp
-        test/test_pose_reduction.cpp
-        test/test_voxelize.cpp
-    )
-
-    set(gpu_test_sources
-        test/test_model_jacobian.cu
-        test/test_mirrored_model.cpp
-    )
-
-    cuda_add_executable(
-                # executable
-                test
-                # main source
-                test/test_main.cpp
-                # test sources
-                ${test_sources}
-                # other sources
-                ${sources}
-                ${gpu_sources}
-                ${gpu_test_sources}
-    )
-    target_link_libraries(test dart)
-
-endif()

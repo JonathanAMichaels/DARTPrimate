@@ -22,7 +22,6 @@
 #include "tracker.h"
 #include "util/dart_io.h"
 #include "util/gl_dart.h"
-#include "util/image_io.h"
 #include "util/ostream_operators.h"
 #include "util/string_format.h"
 #include "visualization/color_ramps.h"
