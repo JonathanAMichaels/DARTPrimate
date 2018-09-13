@@ -1,4 +1,0 @@
-/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/edit_cache.dir
-/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/rebuild_cache.dir
-/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/dart.dir
-/home/jonathan/Desktop/DARTPrimate/build/CMakeFiles/linkTarget.dir

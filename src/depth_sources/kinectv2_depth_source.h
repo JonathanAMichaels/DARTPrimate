@@ -45,8 +45,10 @@ private:
     libfreenect2::Freenect2Device *dev = 0;
     libfreenect2::PacketPipeline *pipeline = 0;
     libfreenect2::Frame *depth;
+    libfreenect2::Frame *rgb;
     libfreenect2::FrameMap frames;
     libfreenect2::SyncMultiFrameListener* listener;
+    libfreenect2::Registration* registration;
 
     float _scaleToMeters;
     MirroredVector<DepthType> * _depthData;
@@ -80,16 +82,15 @@ bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive) {
     auto serial = freenect2.getDefaultDeviceSerialNumber();
     pipeline = new libfreenect2::CudaPacketPipeline();
     dev = freenect2.openDevice(serial, pipeline);
-
-    
- //   int types = 0;
-  //  types |= libfreenect2::Frame::Ir | libfreenect2::Frame::Depth;
-    listener = new libfreenect2::SyncMultiFrameListener(4);
+  
+    int types = 0;
+    types |= libfreenect2::Frame::Color | libfreenect2::Frame::Depth;
+    listener = new libfreenect2::SyncMultiFrameListener(types);
 
     dev->setColorFrameListener(listener);
     dev->setIrAndDepthFrameListener(listener);
 
-    if (!dev->startStreams(false, true))
+    if (!dev->startStreams(true, true))
       return -1;
     std::cout << "device serial: " << dev->getSerialNumber() << std::endl;
     std::cout << "device firmware: " << dev->getFirmwareVersion() << std::endl;
@@ -98,7 +99,6 @@ bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive) {
 
     this->_scaleToMeters = (float)1.0/(float)1000.0;
   
-    std::cout << "0" << std::endl;
     // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
@@ -121,8 +121,14 @@ bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive) {
 
     _depthData = new MirroredVector<DepthType>(this->_depthWidth*this->_depthHeight);
     
+    registration = new libfreenect2::Registration(dev->getIrCameraParams(), dev->getColorCameraParams());
+   
+    rgb = frames[libfreenect2::Frame::Color];
+    libfreenect2::Frame undistorted(512, 424, 4), registered(512, 424, 4);
+    registration->apply(rgb, depth, &undistorted, &registered);
+
       
-    auto pixels = (float*)depth->data;    
+    auto pixels = (float*)undistorted.data;    
     auto yy = this->_depthHeight-1;
     for (auto y = 0; y < this->_depthHeight; y++)
     {
@@ -159,8 +165,8 @@ void KinectV2DepthSource<DepthType,ColorType>::setFrame(const uint frame) {
 template <typename DepthType, typename ColorType>
 void KinectV2DepthSource<DepthType,ColorType>::advance() {
     this->_frame++;
-    
-       // If the device is sreaming live and not from a file
+    libfreenect2::Frame undistorted(512, 424, 4), registered(512, 424, 4);
+    // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
         if (!listener->waitForNewFrame(frames, 10*1000)) // 10 seconds
@@ -168,20 +174,22 @@ void KinectV2DepthSource<DepthType,ColorType>::advance() {
             std::cout << "timeout!" << std::endl;
         }
         depth = frames[libfreenect2::Frame::Depth];
+        rgb = frames[libfreenect2::Frame::Color];     
+        registration->apply(rgb, depth, &undistorted, &registered);
     }
     else
     {
       //  pipe->poll_for_frames(&frames);
     }
 
-    auto pixels = (float*)depth->data;    
+    auto pixels = (float*)undistorted.data;    
     auto yy = this->_depthHeight-1;
     for (auto y = 0; y < this->_depthHeight; y++)
     {
         auto xx = this->_depthWidth-1;
         for (auto x = 0; x < this->_depthWidth; x++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + x];
+            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
             xx -= 1;
         }
         yy -= 1;

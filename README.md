@@ -14,14 +14,7 @@ Required Dependencies
 
 **GNU libmatheval:** sudo apt-get install libmatheval-dev
 
-**libjpeg:** sudo apt-get install libjpeg-dev
-
-**libpng:** sudo apt-get install libpng16-dev (must be version 1.4 or greater)
-
-**tinyxml:** sudo apt-get install libtinyxml-dev
-
-
-**Pangolin [GUI for the examples]:** https://github.com/stevenlovegrove/Pangolin
+**Pangolin [necessary for the GUI]:** https://github.com/stevenlovegrove/Pangolin
 
 
 Optional Dependencies
