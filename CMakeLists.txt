@@ -9,6 +9,9 @@ endif()
 # turn on c++11
 add_definitions(-std=c++11)
 
+
+set(CC "61")
+
 # set CMakeModule path
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/CMakeModules/")
 
@@ -109,6 +112,7 @@ set(dart_src
     ${PROJECT_SOURCE_DIR}/src/util/string_format.h
     ${PROJECT_SOURCE_DIR}/src/util/string_format.cpp
     ${PROJECT_SOURCE_DIR}/src/util/vector_type_template.h
+    ${PROJECT_SOURCE_DIR}/src/util/cpptoml.h
 
     ${PROJECT_SOURCE_DIR}/src/visualization/color_ramps.h
     ${PROJECT_SOURCE_DIR}/src/visualization/data_association_viz.h
@@ -172,7 +176,7 @@ include_directories(${PROJECT_SOURCE_DIR}/src/)
 set(BUILD_SHARED_LIBS ON)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
-set(CUDA_NVCC_FLAGS "-arch=sm_61" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
+set(CUDA_NVCC_FLAGS "-arch=sm_${CC}" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
 
 # add library
 if (CUDA_FOUND)

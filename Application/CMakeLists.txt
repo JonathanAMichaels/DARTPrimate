@@ -12,6 +12,7 @@ message(STATUS "Found dart is at ${DART_ROOT}")
 include_directories(${DART_ROOT}/src)
 link_directories(${DART_ROOT}/lib)
 
+set(CC "61")
 
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${DART_ROOT}/CMakeModules/")
 
@@ -59,7 +60,7 @@ INCLUDE_DIRECTORIES(
 include_directories( ${CUDA_INCLUDE_DIRS} )
 cuda_include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(CUDA_NVCC_FLAGS "-arch=sm_61" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
+set(CUDA_NVCC_FLAGS "-arch=sm_${CC}" "--use_fast_math"  "-O3" "--ptxas-options=--verbose") # "-fmad=false" "-DTHRUST_DEVICE_BACKEND=THRUST_DEVICE_BACKEND_OMP"
 add_definitions(-DCUDA_BUILD)
 
 set(all_sources ${sources} ${cpu_sources} ${gpu_sources})

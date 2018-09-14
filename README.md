@@ -1,41 +1,46 @@
-dart: Dense Articulated Real-time Tracking
+DARTPrimate: Dense Articulated Real-time Tracking of Primates
 =======
 
-dart is a C++ library for tracking arbitrary articulated models with an RGB-D 
-camera. It achieves real-time performance with the aid of a highly parallel CUDA 
+DARTPrimate is a C++ library for tracking arbitrary articulated models with a depth camera. It achieves real-time performance with the aid of a highly parallel CUDA 
 implementation and state-of-the-art GPUs.
+
+**Note:** This build is intended for Ubuntu 16.04.
 
 Required Dependencies
 ---------------------
 
-**CUDA:** install cuda8.0!!!
+**CUDA:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well.
 
 **Eigen 3:** sudo apt-get install libeigen3-dev
 
 **GNU libmatheval:** sudo apt-get install libmatheval-dev
 
-**Pangolin [necessary for the GUI]:** https://github.com/stevenlovegrove/Pangolin
+**Pangolin [necessary for the GUI]:** Follow the instructions [here](https://github.com/stevenlovegrove/Pangolin)
 
 
 Optional Dependencies
 ---------------------
 
-**libfreenect2:** install newest version (best without OpenCL support, since cuda 8.0 screws that up)
+**libfreenect2 [necessary for Kinect v2 support]:** Follow the instructions [here](https://github.com/OpenKinect/libfreenect2)
 
-**Open Asset Import Library:** sudo apt-get install libassimp-dev [for mesh models]
+**Open Asset Import Library [for mesh models]:** sudo apt-get install libassimp-dev
+
 for creating meshes we recommend KinectFusion, which can be install from here:..
 Note: OpenCV must be installed with CUDA support, which can be done as follows:.. (opencv-3.4.3 opencv-contrib-3.4.3)
 
-**gtest [for testing]:** sudo apt-get install libgtest-dev; cd /usr/src/gtest; sudo mkdir build; cd build; sudo cmake ..; sudo make; sudo mv libgtest* /usr/lib/;
 
 Installation
 ------------
 
-cd [dart directory]
-mkdir build
-cd build
-cmake ..
-make
+		cd [DARTPrimate directory]
+		mkdir build
+		cd build
+cmake should be run with the -DCC flag that matches the compute capability of your graphics card. For example, the compute capability of a GTX 1080 is 6.1, so the command should be:
+
+		cmake -DCC="61"
+Finally, call
+
+		make
 
 Example usage
 ------------

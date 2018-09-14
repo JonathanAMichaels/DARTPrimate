@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <vector_types.h>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv/cv.hpp>
 
 namespace dart {
 
@@ -74,6 +77,7 @@ protected:
     float2 _focalLength;
     float2 _principalPoint;
 
+    bool _record = false;
 };
 
 template <typename DepthType, typename ColorType>
@@ -85,7 +89,9 @@ public:
 
     virtual const ColorType * getColor() const { return 0; }
 
-    bool saveFrame(const uint frame);
+    void setRecordStatus(const bool record);
+    bool saveFrame(const std::string saveDir, const float* depth);
+    float* loadFrame();
 };
 
 
@@ -93,13 +99,36 @@ public:
 // Implementation
 
 template <typename DepthType, typename ColorType>
-bool DepthSource<DepthType, ColorType>::saveFrame(const uint frame) {
+void DepthSource<DepthType, ColorType>::setRecordStatus(const bool record) {
+    _record = record;
+}
+
+
+template <typename DepthType, typename ColorType>
+bool DepthSource<DepthType, ColorType>::saveFrame(const std::string saveDir, const float* depth_frame) {
+
+    cv::Mat depth_image { cv::Size { 512,
+                                     424 },
+                          CV_32FC1,
+                          (void*)(depth_frame),
+                          cv::Mat::AUTO_STEP};
+
+    std::vector<int> compression_params;
+    compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+    compression_params.push_back(0);
+
+    cv::Mat m1(depth_image.rows, depth_image.cols, CV_8UC4, depth_image.data);
+    cv::imwrite(saveDir + "/" + std::to_string(_frame) + ".png", m1, compression_params);
 
     return true;
 }
 
 
-
+template <typename DepthType, typename ColorType>
+float* DepthSource<DepthType, ColorType>::loadFrame() {
+    float* depth_frame;
+    return depth_frame;
+}
 
 
 

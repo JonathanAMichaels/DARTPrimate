@@ -18,7 +18,7 @@ public:
     KinectV2DepthSource();
     ~KinectV2DepthSource();
 
-    bool initialize(const bool isLive = true);
+    bool initialize(const bool isLive, const std::string saveDir, const std::string loadDir);
 
     const DepthType * getDepth() const { return _depthData->hostPtr(); }
     
@@ -52,6 +52,8 @@ private:
 
     float _scaleToMeters;
     MirroredVector<DepthType> * _depthData;
+    std::string _saveDir;
+    std::string _loadDir;
 };
 
 // IMPLEMENTATION
@@ -69,10 +71,12 @@ KinectV2DepthSource<DepthType,ColorType>::~KinectV2DepthSource() {
 }
 
 template <typename DepthType, typename ColorType>
-bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive) {
+bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive, const std::string saveDir, const std::string loadDir) {
 
-    this->_frame = 0;
+    this->_frame = -1;
     this->_isLive = isLive;
+    this->_saveDir = saveDir;
+    this->_loadDir = loadDir;
     
     if(freenect2.enumerateDevices() == 0)
     {
@@ -99,103 +103,73 @@ bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive) {
 
     this->_scaleToMeters = (float)1.0/(float)1000.0;
   
-    // If the device is sreaming live and not from a file
-    if (this->_isLive)
-    {
-        if (!listener->waitForNewFrame(frames, 10*1000)) // 10 seconds
-        {
-            std::cout << "timeout!" << std::endl;
-        }
-        depth = frames[libfreenect2::Frame::Depth];
-    }
-    else
-    {
-      //  pipe->poll_for_frames(&frames);
-    }
-    this->_depthWidth = depth->width;
-    this->_depthHeight = depth->height;
+    this->_depthWidth = 512;
+    this->_depthHeight = 424;
 
     this->_focalLength = make_float2(intrinsics.fx,intrinsics.fy);
     this->_principalPoint = make_float2(intrinsics.cx,intrinsics.cy);
 
-
-    _depthData = new MirroredVector<DepthType>(this->_depthWidth*this->_depthHeight);
-    
+    _depthData = new MirroredVector<DepthType>(this->_depthWidth*this->_depthHeight);   
     registration = new libfreenect2::Registration(dev->getIrCameraParams(), dev->getColorCameraParams());
-   
-    rgb = frames[libfreenect2::Frame::Color];
-    libfreenect2::Frame undistorted(512, 424, 4), registered(512, 424, 4);
-    registration->apply(rgb, depth, &undistorted, &registered);
 
-      
-    auto pixels = (float*)undistorted.data;    
-    auto yy = this->_depthHeight-1;
-    for (auto y = 0; y < this->_depthHeight; y++)
-    {
-        auto xx = this->_depthWidth-1;
-        for (auto x = 0; x < this->_depthWidth; x++)
-        {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
-            xx -= 1;
-        }
-        yy -= 1;
-    }
-
-    _depthData->syncHostToDevice();
-    listener->release(frames);
-
+    advance();
     return true;
 }
 
 template <typename DepthType, typename ColorType>
 uint64_t KinectV2DepthSource<DepthType,ColorType>::getDepthTime() const {
-    std::cout << "timestamp" << std::endl;
     return depth->timestamp;
 }
 
 template <typename DepthType, typename ColorType>
 void KinectV2DepthSource<DepthType,ColorType>::setFrame(const uint frame) {
-
-    if (_isLive)
-        return;
-    //advance();
-
+    if (!_isLive)
+        _frame = frame;
+    return;
 }
 
 template <typename DepthType, typename ColorType>
 void KinectV2DepthSource<DepthType,ColorType>::advance() {
-    this->_frame++;
     libfreenect2::Frame undistorted(512, 424, 4), registered(512, 424, 4);
+    float* depth_frame;
     // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
-        if (!listener->waitForNewFrame(frames, 10*1000)) // 10 seconds
-        {
-            std::cout << "timeout!" << std::endl;
-        }
+        listener->waitForNewFrame(frames, 10*1000); // 10 seconds
         depth = frames[libfreenect2::Frame::Depth];
         rgb = frames[libfreenect2::Frame::Color];     
         registration->apply(rgb, depth, &undistorted, &registered);
+
+        depth_frame = (float*)undistorted.data;    
     }
     else
     {
-      //  pipe->poll_for_frames(&frames);
+        depth_frame = loadFrame();
     }
 
-    auto pixels = (float*)undistorted.data;    
     auto yy = this->_depthHeight-1;
     for (auto y = 0; y < this->_depthHeight; y++)
     {
         auto xx = this->_depthWidth-1;
         for (auto x = 0; x < this->_depthWidth; x++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = pixels[this->_depthWidth*yy + xx];
+            _depthData->hostPtr()[this->_depthWidth*y + x] = depth_frame[this->_depthWidth*yy + xx];
             xx -= 1;
         }
         yy -= 1;
     }
+
     _depthData->syncHostToDevice();
     listener->release(frames);
+
+
+    if (_record)
+    {
+        bool saveSuccess = saveFrame(_saveDir, depth_frame);
+    }
+
+
+    this->_frame++;
 }
 
 

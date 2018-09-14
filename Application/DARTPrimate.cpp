@@ -13,7 +13,8 @@
 #include <cuda_runtime.h>
 #include <vector_types.h>
 
-#include "depth_sources/realsense_depth_source.h"
+// Uncomment this line if you want to use RealSense
+//#include "depth_sources/realsense_depth_source.h"
 #include "depth_sources/kinectv2_depth_source.h"
 
 #include "geometry/plane_fitting.h"
@@ -24,10 +25,12 @@
 #include "util/gl_dart.h"
 #include "util/ostream_operators.h"
 #include "util/string_format.h"
+#include <util/cpptoml.h>
 #include "visualization/color_ramps.h"
 #include "visualization/data_association_viz.h"
 #include "visualization/gradient_viz.h"
 #include "visualization/sdf_viz.h"
+
 
 #define EIGEN_DONT_ALIGN
 
@@ -79,81 +82,16 @@ static float initialTableIntercept = -0.705196;
 
 int main(int argc, char* argv[]) {
 
-    // Set defaults for command-line arguments
-    bool isLive = true;
-    int streamDevice = 0;
-    std::string saveFile = "";
-    std::string loadFile = "";
-    std::string modelDir = "4dofArm";
-
-    for (int i = 1; i < argc; ++i)
+    if (argc != 2)
     {
-        if (std::string(argv[i]) == "--device")
-        {
-            if (i + 1 < argc)
-            {
-                i++;
-                if (std::string(argv[i]) == "realsense")
-                {
-                    streamDevice = 1;
-                }    
-                else if (std::string(argv[i]) == "kinect")
-                {
-                    streamDevice = 0;
-                }
-                else
-                {
-                    std::cerr << "Unrecognized device specified." << std::endl;
-                    return 1;
-                }
-
-            }
-            else
-            {
-                std::cerr << "--device option requires one argument." << std::endl;
-                return 1;
-            }  
-        }
-        else if (std::string(argv[i]) == "--saveFile")
-        {
-            if (i + 1 < argc)
-            {
-                saveFile = std::string(argv[i++]);
-            }
-            else
-            {
-                std::cerr << "--saveFile option requires one argument." << std::endl;
-                return 1;
-            }  
-        }
-        else if (std::string(argv[i]) == "--loadFile")
-        {
-            if (i + 1 < argc)
-            {
-                loadFile = std::string(argv[i++]);
-                isLive = false;
-            }
-            else
-            {
-                std::cerr << "--loadFile option requires one argument." << std::endl;
-                return 1;
-            }  
-        }
-        else if (std::string(argv[i]) == "--modelDir")
-        {
-            if (i + 1 < argc)
-            {
-                modelDir = std::string(argv[i++]);
-                isLive = false;
-            }
-            else
-            {
-                std::cerr << "--modelDir option requires one argument." << std::endl;
-                return 1;
-            }  
-        }
+        std::cerr << "The only allowed input is a single config file" << std::endl;
     }
+    auto toml_config = cpptoml::parse_file(argv[1]);
 
+    bool isLive = *toml_config->get_qualified_as<bool>("camera.live");
+    std::string saveDir = *toml_config->get_as<std::string>("save_directory");
+    std::string loadDir = *toml_config->get_as<std::string>("load_directory");
+    std::string modelDir = *toml_config->get_as<std::string>("model_directory");
 
     const float objObsSdfRes = 0.0025;
     const float3 objObsSdfOffset = make_float3(0,0,0);
@@ -215,23 +153,15 @@ int main(int argc, char* argv[]) {
 
     std::vector<pangolin::Var<float> *> sizeVars;
 
-    // initialize depth source
-    
-    
+    // Initialize Kinect depth source
     dart::KinectV2DepthSource<ushort,uchar3> *depthSource = new dart::KinectV2DepthSource<ushort,uchar3>();
-    if (streamDevice == 0)
-    {
-        dart::KinectV2DepthSource<ushort,uchar3> *depthSource = new dart::KinectV2DepthSource<ushort,uchar3>();
-    }
-    else if (streamDevice == 1)
-    {
-        dart::RealSenseDepthSource<ushort,uchar3> *depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
-    }
     
+    // Uncomment this line if you want to use RealSense
+    //dart::RealSenseDepthSource<ushort,uchar3> *depthSource = new dart::RealSenseDepthSource<ushort,uchar3>();
 
-    depthSource->initialize(isLive);
+    depthSource->initialize(isLive,saveDir,loadDir);
     tracker.addDepthSource(depthSource);
-
+    
     dart::Optimizer & optimizer = *tracker.getOptimizer();
 
     const static int obsSdfSize = 64;
@@ -281,6 +211,7 @@ int main(int argc, char* argv[]) {
 
     // pangolin variables
     static pangolin::Var<bool> trackFromVideo("ui.track",false,false,true);
+    static pangolin::Var<bool> recordData("ui.record",false,false,true);
     static pangolin::Var<bool> stepVideo("ui.stepVideo",false,false);
     static pangolin::Var<bool> stepVideoBack("ui.stepVideoBack",false,false);
 
@@ -430,6 +361,11 @@ int main(int argc, char* argv[]) {
                 fps = fpsWindow / pangolin::TimeDiff_s(lastTime,time);
             }
             lastTime = time;
+        }
+
+        if (recordData.GuiChanged())
+        {
+            depthSource->setRecordStatus(recordData);
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
