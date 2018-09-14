@@ -32,15 +32,24 @@ Note: OpenCV must be installed with CUDA support, which can be done as follows:.
 Installation
 ------------
 
-		cd [DARTPrimate directory]
-		mkdir build
-		cd build
+	cd [DARTPrimate directory]
+	mkdir build
+	cd build
 cmake should be run with the -DCC flag that matches the compute capability of your graphics card. For example, the compute capability of a GTX 1080 is 6.1, so the command should be:
+	
+	cmake -DCC="61"
+then:
 
-		cmake -DCC="61"
-Finally, call
+	make
+	cd [DARTPrimate directory]/Application
+	mkdir build
+	cd build
+	cmake =DCC="61"
+	make
+To run the program, execute
 
-		make
+	./DARTPrimate ../config.toml
+You must always include a path to a config file, in which all relevant parameters for the session are specified.
 
 Example usage
 ------------
