@@ -9,13 +9,37 @@ implementation and state-of-the-art GPUs.
 Required Dependencies
 ---------------------
 
-**CUDA:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well.
+**CUDA 8.0:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well.
 
 **Eigen 3:** sudo apt-get install libeigen3-dev
 
 **GNU libmatheval:** sudo apt-get install libmatheval-dev
 
 **Pangolin [necessary for the GUI]:** Follow the instructions [here](https://github.com/stevenlovegrove/Pangolin)
+
+**OpenCV (>3.0.0):** Follow the instructions [here](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html). At the cmake step, use the following command, replacing -DCUDA_ARCH_BIN=6.1 with the compute capability of your graphics card.
+
+	cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D WITH_TBB=ON \
+    -D WITH_OPENMP=ON \
+    -D WITH_IPP=ON \
+    -D BUILD_EXAMPLES=OFF \
+    -D BUILD_DOCS=OFF \
+    -D BUILD_PERF_TESTS=OFF \
+    -D BUILD_TESTS=OFF \
+    -D WITH_CSTRIPES=ON \
+    -D WITH_OPENCL=OFF \
+    -D WITH_CUDA=ON \
+    -D WITH_GTK=ON \
+    -D ENABLE_FAST_MATH=1 \
+    -D CUDA_FAST_MATH=1 \
+    -D WITH_CUBLAS=1 \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -DCUDA_GENERATION="" \
+    -DCUDA_ARCH_BIN=6.1 \
+    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+    ..
 
 
 Optional Dependencies
@@ -25,8 +49,8 @@ Optional Dependencies
 
 **Open Asset Import Library [for mesh models]:** sudo apt-get install libassimp-dev
 
-for creating meshes we recommend KinectFusion, which can be install from here:..
-Note: OpenCV must be installed with CUDA support, which can be done as follows:.. (opencv-3.4.3 opencv-contrib-3.4.3)
+**KinectFusion [for creating meshes]:** A modified version supporting Kinect can be obtained [here](https://github.com/JonathanAMichaels/KinectFusionApp)
+*Note:* OpenCV must be installed with CUDA support, as described in the above section.
 
 
 Installation
@@ -46,24 +70,17 @@ then:
 	cd build
 	cmake =DCC="61"
 	make
-To run the program, execute
-
-	./DARTPrimate ../config.toml
-You must always include a path to a config file, in which all relevant parameters for the session are specified.
 
 Example usage
 ------------
 
-An example demonstrating the use of DART to track robot hands manipulating objects, including the depth and color video, can be downloaded from [here](http://homes.cs.washington.edu/~tws10/dartExample.tar.gz).
+To run the application, navigate to the [DARTPrimate directory]/Application/build and execute
+
+	./DARTPrimate ../config.toml
+You must always include a path to a config file, in which all relevant parameters for the session are specified.
 
 Notes on using the library
 ------------
-
-- OpenGL context: dart is a very visual library and therefore assumes that it 
-will be used in collaboration with a GUI tool. If an instance of dart::Tracker 
-is instantiated with no active OpenGL context, it will not work. If you are not 
-using the library with a GUI, you will have to create an OpenGL context (e.g. by 
-using glutCreateWindow to create a 1x1 window).
 
 - Frames vs. Joints vs. SDFs: These are three separate but related ways in which
 parts of a DART model can be referenced. A frame is a frame of reference in the
