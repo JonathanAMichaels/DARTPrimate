@@ -14,13 +14,13 @@
                 <position x="0" y="0" z="0" />
                 <orientation x="0" y="0" z="0" />
                 <axis x="1" y="0" z="0" />
-                <geom type="cylinder" sx="0.03" sy="0.03" sz="0.3" tx="0" ty="0" tz="0" rx="-1.5708" ry="0" rz="0" red="80" green="63" blue="113" />
+                <geom type="cylinder" sx="0.03" sy="0.03" sz="0.29" tx="0" ty="0" tz="0" rx="-1.5708" ry="0" rz="0" red="80" green="63" blue="113" />
 
                 <frame jointName="Elb Flex" jointType="rotational" jointMin="-6" jointMax="6">
                     <position x="0" y="0.28" z="0" />
                     <orientation x="0" y="0" z="0" />
                     <axis x="1" y="0" z="0" />
-                    <geom type="cylinder" sx="0.03" sy="0.03" sz="0.3" tx="0" ty="0" tz="0" rx="0" ry="0" rz="-1.5708" red="80" green="140" blue="113" />
+                    <geom type="cylinder" sx="0.03" sy="0.03" sz="0.4" tx="0" ty="0" tz="0" rx="0" ry="0" rz="-1.5708" red="80" green="140" blue="113" />
 
                 </frame>
             </frame>

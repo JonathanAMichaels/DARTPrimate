@@ -307,17 +307,25 @@ int main(int argc, char* argv[]) {
     dart::Pose & armPose = tracker.getPose(0);
 
     // -=-=-=-=- set up initial poses -=-=-=-=-
-    armPose.getReducedArticulation()[0] = 2.3;
-    armPose.getReducedArticulation()[1] = -1.0;
-    armPose.getReducedArticulation()[2] = 0;
-    armPose.getReducedArticulation()[3] = 0.6;
-    armPose.setTransformModelToCamera(dart::SE3Fromse3(dart::se3(0.29, 0.21, 0.85,0,0,0))*
+    armPose.getReducedArticulation()[0] = -0.25;
+    armPose.getReducedArticulation()[1] = 0.2;
+    armPose.getReducedArticulation()[2] = 0.88;
+    armPose.getReducedArticulation()[3] = -0.92;
+    armPose.setTransformModelToCamera(dart::SE3Fromse3(dart::se3(-0.25, 0.21, 0.88,0,0,0))*
                             dart::SE3Fromse3(dart::se3(0,0,0,0,0,0)));
 
     arm.setPose(armPose);
 
     // ------------------- main loop ---------------------
     for (int pangolinFrame=1; !pangolin::ShouldQuit(); ++pangolinFrame) {
+        static pangolin::Var<bool> filteredNorms("ui.filteredNorms",false,true);
+        static pangolin::Var<bool> filteredVerts("ui.filteredVerts",false,true);
+
+        static pangolin::Var<bool> shouldQuit("ui.Quit",false,false);
+        if (pangolin::Pushed(shouldQuit))
+        {
+            break;
+        }
 
         if (pangolin::HasResized()) {
             pangolin::DisplayBase().ActivateScissorAndClear();
@@ -375,9 +383,6 @@ int main(int argc, char* argv[]) {
         //                                                                                                      //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         {
-
-            static pangolin::Var<bool> filteredNorms("ui.filteredNorms",false,true);
-            static pangolin::Var<bool> filteredVerts("ui.filteredVerts",false,true);
 
             if (filteredNorms.GuiChanged()) {
                 tracker.setFilteredNorms(filteredNorms);
@@ -835,7 +840,8 @@ int main(int argc, char* argv[]) {
             float totalPerPointError = optimizer.getErrPerObsPoint(1,0) + optimizer.getErrPerModPoint(1,0);
         }
     }
-
+    delete depthSource;
+    glutDestroyWindow(myargc);
     glDeleteBuffersARB(1,&pointCloudVbo);
     glDeleteBuffersARB(1,&pointCloudColorVbo);
     glDeleteBuffersARB(1,&pointCloudNormVbo);
@@ -850,8 +856,6 @@ int main(int argc, char* argv[]) {
     for (uint i=0; i<sizeVars.size(); ++i) {
         delete sizeVars[i];
     }
-
-    delete depthSource;
 
     return 0;
 }

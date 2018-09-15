@@ -1,8 +1,8 @@
 # Configuration file for DARTPrimate Application
 
 save_directory = "/home/jonathan/Documents/test"
-load_directory = ""
+load_directory = "/home/jonathan/Documents/test"
 model_directory = "4dofArm"
 
 [camera]
-live = true
+live = false

@@ -91,7 +91,7 @@ public:
 
     void setRecordStatus(const bool record);
     bool saveFrame(const std::string saveDir, const float* depth);
-    float* loadFrame();
+    float* loadFrame(const std::string loadDir);
 };
 
 
@@ -115,7 +115,7 @@ bool DepthSource<DepthType, ColorType>::saveFrame(const std::string saveDir, con
 
     std::vector<int> compression_params;
     compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-    compression_params.push_back(0);
+    compression_params.push_back(3);
 
     cv::Mat m1(depth_image.rows, depth_image.cols, CV_8UC4, depth_image.data);
     cv::imwrite(saveDir + "/" + std::to_string(_frame) + ".png", m1, compression_params);
@@ -125,8 +125,17 @@ bool DepthSource<DepthType, ColorType>::saveFrame(const std::string saveDir, con
 
 
 template <typename DepthType, typename ColorType>
-float* DepthSource<DepthType, ColorType>::loadFrame() {
-    float* depth_frame;
+float* DepthSource<DepthType, ColorType>::loadFrame(const std::string loadDir) {
+    cv::Mat depth;
+    depth = cv::imread(loadDir + "/" + std::to_string(_frame) + ".png", -1);
+    if (depth.data == NULL)
+    {
+        return (float*)(depth.data);
+    }
+
+    cv::Mat m2(depth.rows, depth.cols, CV_32FC1, depth.data);
+    auto depth_frame = (float*)(m2.data);
+
     return depth_frame;
 }
 

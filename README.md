@@ -49,8 +49,7 @@ Optional Dependencies
 
 **Open Asset Import Library [for mesh models]:** sudo apt-get install libassimp-dev
 
-**KinectFusion [for creating meshes]:** A modified version supporting Kinect can be obtained [here](https://github.com/JonathanAMichaels/KinectFusionApp)
-*Note:* OpenCV must be installed with CUDA support, as described in the above section.
+**KinectFusion [for creating meshes]:** A modified version supporting Kinect can be obtained [here](https://github.com/JonathanAMichaels/KinectFusionApp). *Note:* OpenCV must be installed with CUDA support, as described in the above section.
 
 
 Installation
@@ -65,7 +64,7 @@ cmake should be run with the -DCC flag that matches the compute capability of yo
 then:
 
 	make
-	cd [DARTPrimate directory]/Application
+	cd ../Application
 	mkdir build
 	cd build
 	cmake =DCC="61"
@@ -78,6 +77,8 @@ To run the application, navigate to the [DARTPrimate directory]/Application/buil
 
 	./DARTPrimate ../config.toml
 You must always include a path to a config file, in which all relevant parameters for the session are specified.
+
+By default, the application is configured to use the Kinect v2. If you want to use an Intel RealSense device, the appropriate lines must be commented and changed in DARTPrimate.cpp before compiling the application.
 
 Notes on using the library
 ------------

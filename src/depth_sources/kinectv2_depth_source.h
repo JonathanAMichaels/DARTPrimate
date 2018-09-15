@@ -10,6 +10,8 @@
 #include <vector_types.h>
 #include "util/mirrored_memory.h"
 
+#include <fstream>
+
 namespace dart {
 
 template <typename DepthType, typename ColorType>
@@ -45,7 +47,6 @@ private:
     libfreenect2::Freenect2Device *dev = 0;
     libfreenect2::PacketPipeline *pipeline = 0;
     libfreenect2::Frame *depth;
-    libfreenect2::Frame *rgb;
     libfreenect2::FrameMap frames;
     libfreenect2::SyncMultiFrameListener* listener;
     libfreenect2::Registration* registration;
@@ -54,6 +55,7 @@ private:
     MirroredVector<DepthType> * _depthData;
     std::string _saveDir;
     std::string _loadDir;
+    std::ofstream* output;
 };
 
 // IMPLEMENTATION
@@ -67,16 +69,21 @@ template <typename DepthType, typename ColorType>
 KinectV2DepthSource<DepthType,ColorType>::~KinectV2DepthSource() {
     dev->stop();
     dev->close();
+    output->close(); 
     delete _depthData;
 }
 
 template <typename DepthType, typename ColorType>
 bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive, const std::string saveDir, const std::string loadDir) {
 
-    this->_frame = -1;
+    this->_frame = 0;
     this->_isLive = isLive;
     this->_saveDir = saveDir;
     this->_loadDir = loadDir;
+    if (_isLive)
+    {
+        output = new std::ofstream(saveDir + "/timestamps.txt");
+    }
     
     if(freenect2.enumerateDevices() == 0)
     {
@@ -88,13 +95,13 @@ bool KinectV2DepthSource<DepthType,ColorType>::initialize(const bool isLive, con
     dev = freenect2.openDevice(serial, pipeline);
   
     int types = 0;
-    types |= libfreenect2::Frame::Color | libfreenect2::Frame::Depth;
+    types |= libfreenect2::Frame::Depth;
     listener = new libfreenect2::SyncMultiFrameListener(types);
 
     dev->setColorFrameListener(listener);
     dev->setIrAndDepthFrameListener(listener);
 
-    if (!dev->startStreams(true, true))
+    if (!dev->startStreams(false, true))
       return -1;
     std::cout << "device serial: " << dev->getSerialNumber() << std::endl;
     std::cout << "device firmware: " << dev->getFirmwareVersion() << std::endl;
@@ -130,46 +137,49 @@ void KinectV2DepthSource<DepthType,ColorType>::setFrame(const uint frame) {
 
 template <typename DepthType, typename ColorType>
 void KinectV2DepthSource<DepthType,ColorType>::advance() {
-    libfreenect2::Frame undistorted(512, 424, 4), registered(512, 424, 4);
+    libfreenect2::Frame undistorted(512, 424, 4);
     float* depth_frame;
     // If the device is sreaming live and not from a file
     if (this->_isLive)
     {
         listener->waitForNewFrame(frames, 10*1000); // 10 seconds
-        depth = frames[libfreenect2::Frame::Depth];
-        rgb = frames[libfreenect2::Frame::Color];     
-        registration->apply(rgb, depth, &undistorted, &registered);
+        depth = frames[libfreenect2::Frame::Depth];    
+        registration->undistortDepth(depth, &undistorted);
 
         depth_frame = (float*)undistorted.data;    
     }
     else
     {
-        depth_frame = loadFrame();
+        depth_frame = loadFrame(_loadDir);
     }
 
-    auto yy = this->_depthHeight-1;
-    for (auto y = 0; y < this->_depthHeight; y++)
+    if (depth_frame != NULL)
     {
-        auto xx = this->_depthWidth-1;
-        for (auto x = 0; x < this->_depthWidth; x++)
+        auto yy = this->_depthHeight-1;
+        for (auto y = 0; y < this->_depthHeight; y++)
         {
-            _depthData->hostPtr()[this->_depthWidth*y + x] = depth_frame[this->_depthWidth*yy + xx];
-            xx -= 1;
+            auto xx = this->_depthWidth-1;
+            for (auto x = 0; x < this->_depthWidth; x++)
+            {
+                _depthData->hostPtr()[this->_depthWidth*y + x] = depth_frame[this->_depthWidth*yy + xx];
+                xx -= 1;
+            }
+            yy -= 1;
         }
-        yy -= 1;
+
+        _depthData->syncHostToDevice();
+        listener->release(frames);
+        this->_frame++;
     }
 
-    _depthData->syncHostToDevice();
-    listener->release(frames);
-
-
-    if (_record)
+    if (_record && _isLive)
     {
         bool saveSuccess = saveFrame(_saveDir, depth_frame);
+        if (!saveSuccess)
+            std::cerr << "Couldn't save data!" << std::endl;
+        *output << std::to_string(getDepthTime()*0.125) << std::endl;
+        this->_frame++;
     }
-
-
-    this->_frame++;
 }
 
 
