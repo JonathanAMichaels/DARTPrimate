@@ -9,7 +9,7 @@ implementation and state-of-the-art GPUs.
 Required Dependencies
 ---------------------
 
-**CUDA 8.0:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well. Installing Cuda will require an nvidia graphics driver to be installed. We recommend first install the proprietary drivers as follows instead of the graphics drivers included with Cuda:
+**CUDA 8.0:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well. Installing Cuda will require an nvidia graphics driver to be installed. We recommend first installing the proprietary drivers as follows instead of the graphics drivers included with Cuda:
 
     sudo add-apt-repository ppa:graphics-driver/ppa
     sudo apt update
