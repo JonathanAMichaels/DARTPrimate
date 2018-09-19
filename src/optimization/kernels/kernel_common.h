@@ -13,7 +13,7 @@ __device__ inline void getErrorJacobianOfModelPoint(float * J, const float4 & po
                                              const int dims, const int * dependencies, const JointType * jointTypes,
                                              const float3 * jointAxes, const SE3 * T_fms, const SE3 * T_mfs) {
 
-    /* These lines supply the gradient for optimizing the world point.
+    // These lines supply the gradient for optimizing the world point.
     J[0] = dot(errorGrad3D_m,make_float3(-1, 0, 0));
     J[1] = dot(errorGrad3D_m,make_float3( 0,-1, 0));
     J[2] = dot(errorGrad3D_m,make_float3( 0, 0,-1));
@@ -22,8 +22,8 @@ __device__ inline void getErrorJacobianOfModelPoint(float * J, const float4 & po
     J[3] = dot(errorGrad3D_m,make_float3(         0, point_m.z,-point_m.y));
     J[4] = dot(errorGrad3D_m,make_float3(-point_m.z,         0, point_m.x));
     J[5] = dot(errorGrad3D_m,make_float3( point_m.y,-point_m.x,         0));
-    */
-    J[0]=0; J[1]=0; J[2]=0; J[3]=0; J[4]=0; J[5]=0;
+    
+    //J[0]=0; J[1]=0; J[2]=0; J[3]=0; J[4]=0; J[5]=0;
 
 #pragma unroll
     for (int i=0; i<(dims-6); i++) {

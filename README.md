@@ -9,15 +9,29 @@ implementation and state-of-the-art GPUs.
 Required Dependencies
 ---------------------
 
-**CUDA 8.0:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well.
+**CUDA 8.0:** Download Cuda 8.0 [here](https://developer.nvidia.com/cuda-80-ga2-download-archive) and follow installation instructions. Be sure to install the CUDA examples as well. Installing Cuda will require an nvidia graphics driver to be installed. We recommend first install the proprietary drivers as follows instead of the graphics drivers included with Cuda:
+
+    sudo add-apt-repository ppa:graphics-driver/ppa
+    sudo apt update
+    sudo apt install nvidia-387
+
+The exact version may depend on your card, but nvidia-387 is a safe choice for most popular cards.
 
 **Eigen 3:** sudo apt-get install libeigen3-dev
 
 **GNU libmatheval:** sudo apt-get install libmatheval-dev
 
+**tinyxml:** sudo apt-get install libtinyxml-dev
+
+**GLUT:** sudo apt-get install freeglut3-dev
+
 **Pangolin [necessary for the GUI]:** Follow the instructions [here](https://github.com/stevenlovegrove/Pangolin)
 
-**OpenCV (>3.0.0):** Follow the instructions [here](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html). At the cmake step, use the following command, replacing -DCUDA_ARCH_BIN=6.1 with the compute capability of your graphics card.
+**OpenCV (3.4.3):** Follow the instructions [here](https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html). After creating the opencv and opencv_contrib directories, enter each one and manually specify the version:
+
+    git checkout 3.4.3
+
+At the cmake step, use the following command, replacing -DCUDA_ARCH_BIN=6.1 with the compute capability of your graphics card. For example, the compute capability of a GTX 1080 is 6.1, and the command should be:
 
 	cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -60,14 +74,14 @@ Installation
 	cd build
 cmake should be run with the -DCC flag that matches the compute capability of your graphics card. For example, the compute capability of a GTX 1080 is 6.1, so the command should be:
 	
-	cmake -DCC="61"
+	cmake -DCC="61" ..
 then:
 
 	make
 	cd ../Application
 	mkdir build
 	cd build
-	cmake =DCC="61"
+	cmake -DCC="61" ..
 	make
 
 Example usage

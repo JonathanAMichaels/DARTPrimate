@@ -25,6 +25,7 @@ find_package(GLEW REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(eigen3 REQUIRED eigen3)
 pkg_check_modules(matheval REQUIRED libmatheval)
+pkg_check_modules(tinyxml REQUIRED tinyxml)
 pkg_check_modules(assimp assimp)
 
 include_directories(
@@ -32,12 +33,15 @@ include_directories(
     ${OPENGL_INCLUDE_DIR}
     ${GLUT_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIRS}
+    ${tinyxml_INCLUDE_DIR}
 )
+link_directories(${tinyxml_LIBRARY_DIRS})
 link_libraries(
     ${OPENGL_LIBRARIES}
     ${GLUT_glut_LIBRARY}
     ${GLEW_LIBRARIES}
     ${matheval_LIBRARIES}
+    ${tinyxml_LIBRARIES}
 )
 
 # set dart source

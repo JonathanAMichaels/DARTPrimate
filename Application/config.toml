@@ -5,4 +5,4 @@ load_directory = "/home/jonathan/Documents/test"
 model_directory = "4dofArm"
 
 [camera]
-live = false
+live = true
