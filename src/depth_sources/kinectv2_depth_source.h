@@ -151,6 +151,10 @@ void KinectV2DepthSource<DepthType,ColorType>::advance() {
     else
     {
         depth_frame = loadFrame(_loadDir);
+        if (depth_frame == NULL)
+        {
+            this->_frame++;
+        }
     }
 
     if (depth_frame != NULL)
@@ -169,7 +173,7 @@ void KinectV2DepthSource<DepthType,ColorType>::advance() {
 
         _depthData->syncHostToDevice();
         listener->release(frames);
-        this->_frame++;
+        //this->_frame++;
     }
 
     if (_record && _isLive)

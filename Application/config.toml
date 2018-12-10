@@ -1,7 +1,7 @@
 # Configuration file for DARTPrimate Application
 
-save_directory = "/home/jonathan/Documents/test"
-load_directory = "/home/jonathan/Documents/test"
+save_directory = "/home/mocap/Documents/test"
+load_directory = "/home/mocap/Documents/test"
 model_directory = "4dofArm"
 
 [camera]

@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <sstream>
+#include <iterator>
+#include <iostream>
+
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
@@ -80,6 +87,8 @@ const static dart::SE3 T_wc = dart::SE3FromTranslation(make_float3(-0.2,0.8,0))*
 static float3 initialTableNorm = make_float3(0.0182391, 0.665761, -0.745942);
 static float initialTableIntercept = -0.705196;
 
+std::ofstream* pose_output;
+
 int main(int argc, char* argv[]) {
 
     if (argc != 2)
@@ -92,6 +101,8 @@ int main(int argc, char* argv[]) {
     std::string saveDir = *toml_config->get_as<std::string>("save_directory");
     std::string loadDir = *toml_config->get_as<std::string>("load_directory");
     std::string modelDir = *toml_config->get_as<std::string>("model_directory");
+    // Let's always save joint angles no matter what
+    pose_output = new std::ofstream(saveDir + "/pose.txt");
 
     const float objObsSdfRes = 0.0025;
     const float3 objObsSdfOffset = make_float3(0,0,0);
@@ -208,6 +219,7 @@ int main(int argc, char* argv[]) {
         }
 
     }
+
 
     // pangolin variables
     static pangolin::Var<bool> trackFromVideo("ui.track",false,false,true);
@@ -445,6 +457,29 @@ int main(int argc, char* argv[]) {
 
             }
 
+        }
+
+        std::vector<float> vec;
+        std::ostringstream oss;
+        if (recordData)
+        {
+            float3 this_joint = tracker.getModel(0).getJointOrientation(1);
+            vec.push_back(this_joint.x);
+            vec.push_back(this_joint.y);
+            vec.push_back(this_joint.z);
+            
+            if (!vec.empty())
+            {
+            // Convert all but the last element to avoid a trailing ","
+            std::copy(vec.begin(), vec.end()-1,
+                std::ostream_iterator<int>(oss, ","));
+
+            // Now add the last element with no delimiter
+            oss << vec.back();
+            }
+
+            std::cout << oss.str() << std::endl;
+            *pose_output << oss.str() << std::endl;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -841,6 +876,7 @@ int main(int argc, char* argv[]) {
         }
     }
     delete depthSource;
+    pose_output->close();
     glutDestroyWindow(myargc);
     glDeleteBuffersARB(1,&pointCloudVbo);
     glDeleteBuffersARB(1,&pointCloudColorVbo);
